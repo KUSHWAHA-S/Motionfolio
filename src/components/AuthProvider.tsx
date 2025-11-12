@@ -1,54 +1,83 @@
-// src/components/AuthProvider.tsx
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import { useUserStore } from "@/store/useUserStore";
+import { useRouter, usePathname } from "next/navigation";
 
 /**
- * AuthProvider: place near top (e.g., in layout) to ensure a profiles row exists
- * for every authenticated user. Uses client-side upsert.
+ * AuthProvider
+ * -------------------------------------------------------------
+ * - Initializes Supabase session on app load.
+ * - Listens to auth state changes.
+ * - Updates Zustand user store.
+ * - Handles clean redirects between public and private routes.
  */
-export default function AuthProvider({ children }: { children: React.ReactNode }) {
+
+export default function AuthProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [loading, setLoading] = useState(true);
+  const { user, setUser } = useUserStore();
+  const router = useRouter();
+  const pathname = usePathname();
+
   useEffect(() => {
-    let mounted = true;
+    let isMounted = true;
 
-    async function createProfileIfNeeded() {
-      const { data } = await supabase.auth.getSession();
-      const user = data.session?.user;
-      if (!user) return;
+    const initSession = async () => {
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        if (error) console.error("Error fetching session:", error);
 
-      // prepare username default (safe, but encourage user to change)
-      const defaultUsername =
-        (user.user_metadata as any)?.preferred_username ||
-        user.email?.split("@")[0] ||
-        user.id.substring(0, 8);
+        const currentUser = data.session?.user ?? null;
+        if (isMounted) setUser(currentUser);
+      } catch (err) {
+        console.error("Auth init error:", err);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
 
-      // upsert profile (id = auth.users.id)
-      await supabase.from("profiles").upsert({
-        id: user.id,
-        username: defaultUsername,
-        avatar_url: (user.user_metadata as any)?.avatar_url || null,
-      });
-    }
-
-    createProfileIfNeeded();
-
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (!mounted) return;
-      const u = session?.user;
-      if (!u) return;
-      // upsert again on new login events
-      supabase.from("profiles").upsert({
-        id: u.id,
-        username: (u.user_metadata as any)?.preferred_username || u.email?.split("@")[0] || u.id.substring(0, 8),
-        avatar_url: (u.user_metadata as any)?.avatar_url || null,
-      });
+    // Listen for auth changes (login/logout)
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      const updatedUser = session?.user ?? null;
+      setUser(updatedUser);
     });
 
-    return () => {
-      mounted = false;
-      sub?.subscription.unsubscribe();
-    };
-  }, []);
+    initSession();
 
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
+  }, [setUser]);
+
+  // Wait until session check finishes
+ if (loading) {
+   return (
+     <div className='flex h-screen items-center justify-center'>
+       <div className='animate-spin rounded-full h-10 w-10 border-4 border-sky-500 border-t-transparent' />
+       <p className='ml-3 text-slate-600 font-medium'>Checking session...</p>
+     </div>
+   );
+ }
+
+  // 🔐 Redirect authenticated users away from /auth routes
+  if (user && (pathname === "/" || pathname.startsWith("/auth"))) {
+    router.replace("/dashboard");
+    return null;
+  }
+
+  // 🚫 Redirect unauthenticated users away from protected routes
+  if (!user && pathname.startsWith("/dashboard")) {
+    router.replace("/auth/signin");
+    return null;
+  }
+
+  // ✅ Otherwise, render app
   return <>{children}</>;
 }

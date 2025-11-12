@@ -1,10 +1,12 @@
-// src/app/publish/[id]/page.tsx
 import React from "react";
+// @ts-expect-error: PublishPanel might be a client component
 import PublishPanel from "@/components/editor/PublishPanel";
 
-type Props = { params: { id: string } };
+interface PublishPageProps {
+  params: { id: string };
+}
 
-export default function PublishPage({ params }: Props) {
+export default function PublishPage({ params }: PublishPageProps) {
   const { id } = params;
   return (
     <div className="max-w-3xl mx-auto p-6">

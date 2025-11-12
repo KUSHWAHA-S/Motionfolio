@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import { ReactNode } from "react";
-import NavBar from "@/components/layout/NavBar";
-import AuthProvider from "@/components/AuthProvider";
+import NavBar from "../components/layout/NavBar"
+import AuthProvider from "../components/AuthProvider";
 
 export const metadata = { title: "Motionfolio" };
 

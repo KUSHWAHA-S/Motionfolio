@@ -33,7 +33,7 @@ export default function NavBar() {
             <button onClick={handleSignOut} className="text-sm text-red-600">Sign out</button>
           </>
         ) : (
-          <Link href="/auth" className="text-sm text-slate-700">Sign in</Link>
+          <Link href="/auth/signin" className="text-sm text-slate-700">Sign in</Link>
         )}
       </div>
     </nav>
