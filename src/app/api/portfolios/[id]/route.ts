@@ -1,38 +1,53 @@
-// import { NextResponse } from 'next/server';
-// import { createAdminSupabase } from '@/lib/supabaseClient';
-
-
-// export async function GET(_request: Request, { params }: { params: { id: string } }) {
-// const { id } = params;
-// const sb = createAdminSupabase();
-// const { data, error } = await sb
-// .from('portfolios')
-// .select('*, sections(*)')
-// .eq('id', id)
-// .single();
-// if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-// return NextResponse.json({ portfolio: data });
-// }
-
-
-// export async function PUT(request: Request, { params }: { params: { id: string } }) {
-// const sb = createAdminSupabase();
-// const { id } = params;
-// const body = await request.json();
-// const { title, theme } = body;
-// const { data, error } = await sb
-// .from('portfolios')
-// .update({ title, theme, updated_at: new Date() })
-// .eq('id', id)
-// .select()
-// .single();
-// if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-// return NextResponse.json({ portfolio: data });
-// }
-
-
-// src/app/api/portfolios/[id]/route.ts
+import { NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabaseServer";
+
+export async function GET(
+  _req: Request,
+  { params }: { params: { id: string } }
+) {
+  const supabase = await getSupabaseServerClient();
+
+  const { data, error } = await supabase
+    .from("portfolios")
+    .select("*")
+    .eq("id", params.id)
+    .single();
+
+  if (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Portfolio not found" }, { status: 404 });
+  }
+
+  return NextResponse.json(data);
+}
+
+export async function PUT(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
+  const supabase = await getSupabaseServerClient();
+  const body = await req.json();
+
+  const updates = {
+    title: body.title,
+    theme: body.theme,
+    sections: body.sections,
+    updated_at: new Date().toISOString(),
+  };
+
+  const { error } = await supabase
+    .from("portfolios")
+    .update(updates)
+    .eq("id", params.id);
+
+  if (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Failed to update portfolio" }, { status: 500 });
+  }
+
+  return NextResponse.json({ success: true });
+}
+
 
 export async function DELETE(
   request: Request,
@@ -60,3 +75,5 @@ console.log("Deleting portfolio:", id, "for user:", user.id);
 
   return new Response("Deleted successfully", { status: 200 });
 }
+
+

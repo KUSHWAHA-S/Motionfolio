@@ -1,16 +1,21 @@
+// src/hooks/usePortfolioSync.ts
 "use client";
-import { useEffect, useRef } from "react";
-import { usePortfolioStore } from "./usePortfolioStore";
-import { debounce } from "@/lib/debounce";
+
+import { useEffect, useRef, useState } from "react";
+import { usePortfolioStore } from "@/store/usePortfolioStore";
+import {debounce} from "@/lib/debounce";
+
+export type SaveStatus = "idle" | "saving" | "saved" | "error";
 
 export function usePortfolioSync(portfolioId: string) {
   const portfolio = usePortfolioStore();
   const isFirstLoad = useRef(true);
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
 
-  // Debounce save — only push after user stops editing for 2s
-  const savePortfolio = debounce(async (data) => {
+  const savePortfolio = debounce(async (data: any) => {
     try {
-      await fetch(`/api/portfolios/${portfolioId}`, {
+      setSaveStatus("saving");
+      const res = await fetch(`/api/portfolios/${portfolioId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -19,8 +24,11 @@ export function usePortfolioSync(portfolioId: string) {
           sections: data.sections,
         }),
       });
+      if (!res.ok) throw new Error(await res.text());
+      setSaveStatus("saved");
       console.log("✅ Auto-saved portfolio");
     } catch (err) {
+      setSaveStatus("error");
       console.error("❌ Save failed:", err);
     }
   }, 2000);
@@ -36,4 +44,6 @@ export function usePortfolioSync(portfolioId: string) {
       sections: portfolio.sections,
     });
   }, [portfolio.title, portfolio.theme, portfolio.sections]);
+
+  return { saveStatus };
 }
