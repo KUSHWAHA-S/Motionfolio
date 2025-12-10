@@ -1,16 +1,47 @@
-import { NextResponse } from 'next/server';
-import { createAdminSupabase } from '@/lib/supabaseClient';
+// src/app/api/portfolios/publish/route.ts
+import { getSupabaseServerClient } from "@/lib/supabaseServer";
+import { NextResponse } from "next/server";
 
+export async function POST(req: Request) {
+  const supabase = await getSupabaseServerClient();
+  const { id, publish } = await req.json();
 
-export async function POST(request: Request) {
-const body = await request.json();
-const sb = createAdminSupabase();
-const { portfolio_id, slug, public } = body;
-if (!portfolio_id) return NextResponse.json({ error: 'portfolio_id required' }, { status: 400 });
+  if (!id || typeof publish !== "boolean") {
+    return NextResponse.json(
+      { error: "id and publish flag are required" },
+      { status: 400 }
+    );
+  }
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-// set slug + public flag
-const { data, error } = await sb.from('portfolios').update({ slug, public: !!public, updated_at: new Date() }).eq('id', portfolio_id).select().single();
-if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-return NextResponse.json({ portfolio: data });
+  if (!user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const {
+    data: portfolio,
+    error: portfolioError,
+  } = await supabase
+    .from("portfolios")
+    .select("owner_id")
+    .eq("id", id)
+    .single();
+
+  if (portfolioError || !portfolio || portfolio.owner_id !== user.id) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  const { error } = await supabase
+    .from("portfolios")
+    .update({ is_public: publish })
+    .eq("id", id);
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ success: true, is_public: publish });
 }

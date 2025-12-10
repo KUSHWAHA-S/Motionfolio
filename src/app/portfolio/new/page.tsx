@@ -17,6 +17,7 @@ export default function NewPortfolioPage() {
       const res = await fetch("/api/portfolios", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           title,
           theme: { primary: themeColor, secondary: "#1E293B" },
@@ -37,43 +38,43 @@ export default function NewPortfolioPage() {
     }
   };
 
-    return (
-      <ProtectedRoute>
-        <div className='flex flex-col items-center justify-center min-h-screen p-6 bg-slate-50'>
-          <div className='w-full max-w-md bg-white shadow-md rounded-2xl p-6'>
-            <h1 className='text-2xl font-semibold mb-4 text-center'>
-              Create New Portfolio
-            </h1>
+  return (
+    <ProtectedRoute>
+      <div className='flex flex-col items-center justify-center min-h-screen p-6 bg-slate-50'>
+        <div className='w-full max-w-md bg-white shadow-md rounded-2xl p-6'>
+          <h1 className='text-2xl font-semibold mb-4 text-center'>
+            Create New Portfolio
+          </h1>
 
-            <label className='block mb-3'>
-              <span className='text-sm text-gray-600'>Title</span>
-              <input
-                className='w-full mt-1 p-2 border rounded-md'
-                placeholder='My Awesome Portfolio'
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </label>
+          <label className='block mb-3'>
+            <span className='text-sm text-gray-600'>Title</span>
+            <input
+              className='w-full mt-1 p-2 border rounded-md'
+              placeholder='My Awesome Portfolio'
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </label>
 
-            <label className='block mb-3'>
-              <span className='text-sm text-gray-600'>Primary Color</span>
-              <input
-                type='color'
-                className='w-full h-10 mt-1 border rounded-md'
-                value={themeColor}
-                onChange={(e) => setThemeColor(e.target.value)}
-              />
-            </label>
+          <label className='block mb-3'>
+            <span className='text-sm text-gray-600'>Primary Color</span>
+            <input
+              type='color'
+              className='w-full h-10 mt-1 border rounded-md'
+              value={themeColor}
+              onChange={(e) => setThemeColor(e.target.value)}
+            />
+          </label>
 
-            <button
-              onClick={handleCreate}
-              disabled={loading}
-              className='w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition'
-            >
-              {loading ? "Creating..." : "Create Portfolio"}
-            </button>
-          </div>
+          <button
+            onClick={handleCreate}
+            disabled={loading}
+            className='w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition'
+          >
+            {loading ? "Creating..." : "Create Portfolio"}
+          </button>
         </div>
-      </ProtectedRoute>
-    );
+      </div>
+    </ProtectedRoute>
+  );
 }

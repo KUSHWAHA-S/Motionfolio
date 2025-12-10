@@ -1,6 +1,7 @@
 "use client";
+
 import { useUserStore } from "@/store/useUserStore";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function ProtectedRoute({
@@ -10,24 +11,29 @@ export default function ProtectedRoute({
 }) {
   const { user } = useUserStore();
   const router = useRouter();
+  const pathname = usePathname();
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    // Wait until user store has been hydrated
     setReady(true);
   }, []);
 
   useEffect(() => {
-    if (ready && !user) {
-      console.log("Redirecting to signin because user missing");
-      router.replace("/auth/signin");
-    } else if (ready && user) {
-      console.log("User logged in:", user.email);
-    }
-  }, [ready, user, router]);
+    if (!ready) return;
 
-  if (!ready) return <p>Initializing...</p>;
-  if (!user) return <p>Loading...</p>;
+    if (!user) {
+      const next = pathname ? `?next=${encodeURIComponent(pathname)}` : "";
+      router.replace(`/auth/login${next}`);
+    }
+  }, [ready, user, router, pathname]);
+
+  if (!ready || !user) {
+    return (
+      <div className='flex min-h-[50vh] items-center justify-center text-slate-500'>
+        Checking your session…
+      </div>
+    );
+  }
 
   return <>{children}</>;
 }

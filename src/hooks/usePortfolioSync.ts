@@ -18,6 +18,7 @@ export function usePortfolioSync(portfolioId: string) {
       const res = await fetch(`/api/portfolios/${portfolioId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           title: data.title,
           theme: data.theme,
@@ -26,12 +27,11 @@ export function usePortfolioSync(portfolioId: string) {
       });
       if (!res.ok) throw new Error(await res.text());
       setSaveStatus("saved");
-      console.log("✅ Auto-saved portfolio");
     } catch (err) {
       setSaveStatus("error");
-      console.error("❌ Save failed:", err);
+      console.error("Failed to auto-save portfolio:", err);
     }
-  }, 2000);
+  }, 20000);
 
   useEffect(() => {
     if (isFirstLoad.current) {

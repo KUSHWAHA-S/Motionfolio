@@ -1,17 +1,9 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useUserStore } from "@/store/useUserStore";
 import { useRouter, usePathname } from "next/navigation";
-
-/**
- * AuthProvider
- * -------------------------------------------------------------
- * - Initializes Supabase session on app load.
- * - Listens to auth state changes.
- * - Updates Zustand user store.
- * - Handles clean redirects between public and private routes.
- */
 
 export default function AuthProvider({
   children,
@@ -26,29 +18,47 @@ export default function AuthProvider({
   useEffect(() => {
     let isMounted = true;
 
-    const initSession = async () => {
+    const initAuth = async () => {
       try {
-        const { data, error } = await supabase.auth.getSession();
-        if (error) console.error("Error fetching session:", error);
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
 
-        const currentUser = data.session?.user ?? null;
-        if (isMounted) setUser(currentUser);
+        if (!session) {
+          if (isMounted) {
+            setUser(null);
+            setLoading(false);
+          }
+          return;
+        }
+
+        const { data, error } = await supabase.auth.getUser();
+        if (error && error.name !== "AuthSessionMissingError") {
+          console.error("Error fetching user:", error);
+        }
+
+        if (isMounted) {
+          setUser(data?.user ?? null);
+          setLoading(false);
+        }
       } catch (err) {
-        console.error("Auth init error:", err);
-      } finally {
-        if (isMounted) setLoading(false);
+        console.error("Error initializing auth:", err);
+        if (isMounted) {
+          setUser(null);
+          setLoading(false);
+        }
       }
     };
 
-    // Listen for auth changes (login/logout)
+    // auth listener updates local state, NOT fetching user again
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      const updatedUser = session?.user ?? null;
-      setUser(updatedUser);
+      setUser(session?.user ?? null);
+      setLoading(false);
     });
 
-    initSession();
+    initAuth();
 
     return () => {
       isMounted = false;
@@ -56,28 +66,30 @@ export default function AuthProvider({
     };
   }, [setUser]);
 
-  // Wait until session check finishes
- if (loading) {
-   return (
-     <div className='flex h-screen items-center justify-center'>
-       <div className='animate-spin rounded-full h-10 w-10 border-4 border-sky-500 border-t-transparent' />
-       <p className='ml-3 text-slate-600 font-medium'>Checking session...</p>
-     </div>
-   );
- }
+  // Redirect logic
+  useEffect(() => {
+    if (loading) return;
 
-  // 🔐 Redirect authenticated users away from /auth routes
-  if (user && (pathname === "/" || pathname.startsWith("/auth"))) {
-    router.replace("/dashboard");
-    return null;
+    const isDashboard = pathname.startsWith("/dashboard");
+    const isNewPortfolio = pathname === "/portfolio/new";
+    const isEditPortfolio =
+      pathname.startsWith("/portfolio/") && pathname.endsWith("/edit");
+    const isProtectedPage = isDashboard || isNewPortfolio || isEditPortfolio;
+
+    if (!user && isProtectedPage) {
+      const next = pathname ? `?next=${encodeURIComponent(pathname)}` : "";
+      router.replace(`/auth/login${next}`);
+    }
+  }, [user, pathname, loading, router]);
+
+  if (loading) {
+    return (
+      <div className='flex h-screen items-center justify-center'>
+        <div className='animate-spin rounded-full h-10 w-10 border-4 border-sky-500 border-t-transparent' />
+        <p className='ml-3 text-slate-600 font-medium'>Checking session...</p>
+      </div>
+    );
   }
 
-  // 🚫 Redirect unauthenticated users away from protected routes
-  if (!user && pathname.startsWith("/dashboard")) {
-    router.replace("/auth/signin");
-    return null;
-  }
-
-  // ✅ Otherwise, render app
   return <>{children}</>;
 }
