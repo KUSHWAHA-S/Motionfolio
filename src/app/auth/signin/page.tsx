@@ -2,7 +2,7 @@
 
 import { supabase } from "@/lib/supabaseClient";
 import { useState } from "react";
-import LoadingModal from "../../../components/ui/loading-modal";
+import LoadingModal from "@/components/ui/loading-modal";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SignInPage() {
@@ -69,14 +69,14 @@ export default function SignInPage() {
   };
 
   return (
-    <div className='min-h-screen flex items-center justify-center p-6 relative'>
-      <LoadingModal open={modalOpen} message='Authenticating...' />
+    <div className="min-h-screen flex items-center justify-center p-6 relative">
+      <LoadingModal open={modalOpen} message="Authenticating..." />
 
-      <div className='w-full max-w-md bg-white p-6 rounded shadow'>
-        <h2 className='text-xl font-semibold mb-4'>Sign up for Motionfolio</h2>
+      <div className="w-full max-w-md bg-white p-6 rounded shadow">
+        <h2 className="text-xl font-semibold mb-4">Sign up for Motionfolio</h2>
 
         {errorMessage && (
-          <p className='mb-3 text-sm text-red-600'>{errorMessage}</p>
+          <p className="mb-3 text-sm text-red-600">{errorMessage}</p>
         )}
 
         <form
@@ -84,60 +84,60 @@ export default function SignInPage() {
             e.preventDefault();
             handleSignUp();
           }}
-          className='space-y-3'
+          className="space-y-3"
         >
           <input
-            type='email'
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder='you@example.com'
+            placeholder="you@example.com"
             required
-            className='w-full border rounded px-3 py-2'
+            className="w-full border rounded px-3 py-2"
             disabled={loading}
           />
           <input
-            type='password'
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder='Your password'
+            placeholder="Your password"
             required
-            className='w-full border rounded px-3 py-2'
+            className="w-full border rounded px-3 py-2"
             disabled={loading}
           />
           <button
             disabled={loading}
-            className='w-full bg-blue-600 text-white rounded px-3 py-2'
+            className="w-full bg-blue-600 text-white rounded px-3 py-2"
           >
             {loading ? "Creating account..." : "Sign up"}
           </button>
         </form>
 
-        <div className='mt-4 text-center space-y-2'>
-          <p className='text-sm text-slate-600'>Tell us a bit about you:</p>
-          <div className='space-y-2 mb-2'>
+        <div className="mt-4 text-center space-y-2">
+          <p className="text-sm text-slate-600">Tell us a bit about you:</p>
+          <div className="space-y-2 mb-2">
             <input
-              type='text'
+              type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder='Choose a username (optional)'
-              className='w-full border rounded px-3 py-2 text-sm'
+              placeholder="Choose a username (optional)"
+              className="w-full border rounded px-3 py-2 text-sm"
               disabled={loading}
             />
             <textarea
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              placeholder='Short bio (optional)'
-              className='w-full border rounded px-3 py-2 text-sm resize-none'
+              placeholder="Short bio (optional)"
+              className="w-full border rounded px-3 py-2 text-sm resize-none"
               rows={3}
               disabled={loading}
             />
           </div>
-          <p className='text-sm text-slate-600'>
+          <p className="text-sm text-slate-600">
             Already have an account?{" "}
             <button
-              type='button'
+              type="button"
               onClick={() => router.push("/auth/login")}
-              className='text-blue-600 underline'
+              className="text-blue-600 underline"
               disabled={loading}
             >
               Log in

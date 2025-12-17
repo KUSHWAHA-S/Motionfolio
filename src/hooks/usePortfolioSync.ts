@@ -23,15 +23,22 @@ export function usePortfolioSync(portfolioId: string) {
           title: data.title,
           theme: data.theme,
           sections: data.sections,
+          // Template is included for forward-compatibility; the API currently
+          // ignores unknown fields, and the DB can start persisting it later.
+          template: data.template,
         }),
       });
       if (!res.ok) throw new Error(await res.text());
       setSaveStatus("saved");
+      // Reset to idle after 2 seconds
+      setTimeout(() => setSaveStatus("idle"), 2000);
     } catch (err) {
       setSaveStatus("error");
       console.error("Failed to auto-save portfolio:", err);
+      // Reset error after 3 seconds
+      setTimeout(() => setSaveStatus("idle"), 3000);
     }
-  }, 20000);
+  }, 500);
 
   useEffect(() => {
     if (isFirstLoad.current) {
@@ -42,8 +49,9 @@ export function usePortfolioSync(portfolioId: string) {
       title: portfolio.title,
       theme: portfolio.theme,
       sections: portfolio.sections,
+      template: portfolio.template,
     });
-  }, [portfolio.title, portfolio.theme, portfolio.sections]);
+  }, [portfolio.title, portfolio.theme, portfolio.sections, portfolio.template]);
 
   return { saveStatus };
 }

@@ -1,0 +1,213 @@
+.threeD-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* --- Soft 3D blobs --- */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.55;
+    animation: float 10s ease-in-out infinite;
+}
+
+.b1 {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle at 30% 30%, #ff7af2, #b300ff);
+    top: 10%;
+    left: 5%;
+    animation-duration: 12s;
+}
+
+.b2 {
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle at 70% 30%, #00d2ff, #007aff);
+    top: 40%;
+    left: 60%;
+    animation-duration: 10s;
+}
+
+.b3 {
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle at 40% 80%, #ffe36e, #ff9800);
+    bottom: -10%;
+    left: 20%;
+    animation-duration: 14s;
+}
+
+/* --- 3D round rings like on that website --- */
+.ring {
+    position: absolute;
+    border: 3px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+    backdrop-filter: blur(8px);
+    animation: spin 16s linear infinite;
+}
+
+.r1 {
+    width: 420px;
+    height: 420px;
+    top: 15%;
+    left: 55%;
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.r2 {
+    width: 330px;
+    height: 330px;
+    top: 55%;
+    left: 25%;
+    border-color: rgba(255, 255, 255, 0.18);
+    animation-duration: 22s;
+}
+
+/* --- Animations --- */
+@keyframes float {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(40px, -60px) scale(1.12);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg) translateZ(0);
+    }
+
+    100% {
+        transform: rotate(360deg) translateZ(0);
+    }
+}
+
+.metal-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+    transform: translateZ(0);
+    /* promote to its own layer */
+}
+
+/* position and sizing for each ribbon */
+.metal-bg .ribbon {
+    position: absolute;
+    will-change: transform, opacity;
+    transition: transform 0.9s cubic-bezier(.2, .9, .2, 1), opacity 0.6s;
+    opacity: 0.95;
+    mix-blend-mode: screen;
+    /* helps with light/metal blending */
+}
+
+/* Specific placements (tweak values to taste) */
+.metal-bg .r1 {
+    left: -6%;
+    top: 6%;
+    width: 110vw;
+    height: 70vh;
+    transform: translate3d(0, 0, 0) rotate(-2deg) scale(1.02);
+}
+
+.metal-bg .r2 {
+    right: 4%;
+    top: 12%;
+    width: 70vw;
+    height: 55vh;
+    transform: translate3d(0, 0, 0) rotate(6deg);
+    opacity: 0.98;
+}
+
+.metal-bg .r3 {
+    left: 4%;
+    bottom: -6%;
+    width: 95vw;
+    height: 75vh;
+    transform: translate3d(0, 0, 0) rotate(-6deg);
+}
+
+.metal-bg .r4 {
+    left: 10%;
+    top: 28%;
+    width: 90vw;
+    height: 35vh;
+    transform: translate3d(0, 0, 0) rotate(-1deg);
+    opacity: 0.6;
+    filter: blur(1px) saturate(115%);
+}
+
+.metal-bg .r5 {
+    right: 26%;
+    top: 46%;
+    width: 50vw;
+    height: 28vh;
+    transform: translate3d(0, 0, 0) rotate(10deg);
+    opacity: 0.95;
+}
+
+/* small gentle float animation */
+@keyframes floatY {
+    0% {
+        transform: translate3d(0, 0px, 0) rotate(0.01deg);
+    }
+
+    50% {
+        transform: translate3d(0, -18px, 0) rotate(0.01deg);
+    }
+
+    100% {
+        transform: translate3d(0, 0px, 0) rotate(0.01deg);
+    }
+}
+
+.metal-bg .r1 {
+    animation: floatY 14s ease-in-out infinite;
+}
+
+.metal-bg .r2 {
+    animation: floatY 11s ease-in-out infinite;
+}
+
+.metal-bg .r3 {
+    animation: floatY 18s ease-in-out infinite;
+}
+
+.metal-bg .r4 {
+    animation: floatY 20s ease-in-out infinite;
+}
+
+.metal-bg .r5 {
+    animation: floatY 9s ease-in-out infinite;
+}
+
+/* responsive adjustments */
+@media (max-width: 900px) {
+
+    .metal-bg .r1,
+    .metal-bg .r3 {
+        opacity: 0.9;
+        filter: blur(1px);
+    }
+
+    .metal-bg .r4 {
+        display: none;
+    }
+
+    /* hide fine detail on narrow screens */
+}

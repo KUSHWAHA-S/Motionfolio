@@ -17,12 +17,18 @@ export interface PortfolioState {
   title: string;
   theme: Theme;
   sections: Section[];
+  /**
+   * Identifier for the visual template used to render this portfolio.
+   * This controls which template component is used on preview/public pages.
+   */
+  template: string;
 
   setTitle: (title: string) => void;
   setTheme: (theme: Partial<Theme>) => void;
   addSection: (section: Section) => void;
   updateSection: (id: string, section: Partial<Section>) => void;
   removeSection: (id: string) => void;
+  setTemplate: (template: string) => void;
   reset: () => void;
   load: (data: Partial<PortfolioState>) => void;
 }
@@ -31,6 +37,8 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
   title: "Untitled Portfolio",
   theme: { primary: "#0EA5E9", secondary: "#1E293B" },
   sections: [],
+   // Current default template – this is the existing LivePreview design
+  template: "modern-creative",
 
   setTitle: (title) => set({ title }),
   setTheme: (theme) =>
@@ -47,11 +55,13 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
     set((state) => ({
       sections: state.sections.filter((s) => s.id !== id),
     })),
+  setTemplate: (template) => set({ template }),
   reset: () =>
     set({
       title: "Untitled Portfolio",
       theme: { primary: "#0EA5E9", secondary: "#1E293B" },
       sections: [],
+      template: "modern-creative",
     }),
   load: (data) =>
     set((state) => ({

@@ -13,21 +13,21 @@ export function SaveIndicator({ status }: SaveIndicatorProps) {
     switch (status) {
       case "saving":
         return {
-          icon: <Loader2 className="w-4 h-4 animate-spin" />,
+          icon: <Loader2 className='w-4 h-4 animate-spin' />,
           text: "Saving...",
           color: "text-amber-600",
           bgColor: "bg-amber-50",
         };
       case "saved":
         return {
-          icon: <CheckCircle2 className="w-4 h-4" />,
+          icon: <CheckCircle2 className='w-4 h-4' />,
           text: "All changes saved",
           color: "text-emerald-600",
           bgColor: "bg-emerald-50",
         };
       case "error":
         return {
-          icon: <AlertCircle className="w-4 h-4" />,
+          icon: <AlertCircle className='w-4 h-4' />,
           text: "Error saving",
           color: "text-red-600",
           bgColor: "bg-red-50",
@@ -55,4 +55,3 @@ export function SaveIndicator({ status }: SaveIndicatorProps) {
     </motion.div>
   );
 }
-

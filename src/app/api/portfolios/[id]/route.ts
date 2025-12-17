@@ -73,12 +73,18 @@ export async function PUT(
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
-  const updates = {
+  const updates: Record<string, any> = {
     title: body.title,
     theme: body.theme,
     sections: body.sections,
     updated_at: new Date().toISOString(),
   };
+
+  // Persist template when provided. This assumes a `template` column exists
+  // on the `portfolios` table; if not, add it via your DB migration.
+  if (body.template) {
+    updates.template = body.template;
+  }
 
   const { error } = await supabase
     .from("portfolios")

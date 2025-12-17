@@ -2,7 +2,7 @@
 
 import { supabase } from "@/lib/supabaseClient";
 import { useState } from "react";
-import LoadingModal from "../../../components/ui/loading-modal";
+import LoadingModal from "@/components/ui/loading-modal";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
@@ -44,50 +44,50 @@ export default function LoginPage() {
   };
 
   return (
-    <div className='min-h-screen flex items-center justify-center p-6 relative'>
-      <LoadingModal open={modalOpen} message='Authenticating...' />
+    <div className="min-h-screen flex items-center justify-center p-6 relative">
+      <LoadingModal open={modalOpen} message="Authenticating..." />
 
-      <div className='w-full max-w-md bg-white p-6 rounded shadow'>
-        <h2 className='text-xl font-semibold mb-4'>Log in to Motionfolio</h2>
+      <div className="w-full max-w-md bg-white p-6 rounded shadow">
+        <h2 className="text-xl font-semibold mb-4">Log in to Motionfolio</h2>
 
         {errorMessage && (
-          <p className='mb-3 text-sm text-red-600'>{errorMessage}</p>
+          <p className="mb-3 text-sm text-red-600">{errorMessage}</p>
         )}
 
-        <form onSubmit={handleSignIn} className='space-y-3'>
+        <form onSubmit={handleSignIn} className="space-y-3">
           <input
-            type='email'
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder='you@example.com'
+            placeholder="you@example.com"
             required
-            className='w-full border rounded px-3 py-2'
+            className="w-full border rounded px-3 py-2"
             disabled={loading}
           />
           <input
-            type='password'
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder='Your password'
+            placeholder="Your password"
             required
-            className='w-full border rounded px-3 py-2'
+            className="w-full border rounded px-3 py-2"
             disabled={loading}
           />
           <button
             disabled={loading}
-            className='w-full bg-blue-600 text-white rounded px-3 py-2'
+            className="w-full bg-blue-600 text-white rounded px-3 py-2"
           >
             {loading ? "Signing in..." : "Log in"}
           </button>
         </form>
 
-        <div className='mt-4 text-center'>
-          <p className='text-sm text-slate-600'>
+        <div className="mt-4 text-center">
+          <p className="text-sm text-slate-600">
             Don&apos;t have an account?{" "}
             <button
-              type='button'
+              type="button"
               onClick={() => router.push("/auth/signin")}
-              className='text-blue-600 underline'
+              className="text-blue-600 underline"
               disabled={loading}
             >
               Sign up

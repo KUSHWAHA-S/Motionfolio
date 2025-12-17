@@ -1,0 +1,15 @@
+/* Outlined text style for OverlayMenu */
+.outlined-text {
+  font-family: "Saira Condensed", "Saira", Arial, Helvetica, sans-serif;
+  -webkit-text-stroke: 1px #606887;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 400;
+}
+
+/* Override for name and designation - no outline */
+.no-outline {
+  -webkit-text-stroke: none !important;
+  -webkit-text-fill-color: inherit !important;
+  color: inherit !important;
+}

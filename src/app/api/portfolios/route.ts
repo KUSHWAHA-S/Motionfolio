@@ -42,7 +42,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { title, theme } = await req.json();
+  const { title, theme, template } = await req.json();
 
   // Ensure a profile row exists for this user to satisfy FK constraints
   const defaultUsername = user.email?.split("@")[0] ?? "user";
@@ -74,6 +74,8 @@ export async function POST(req: Request) {
         owner_id: user.id,
         sections: [],
         is_public: false,
+        // Default template is the original modern design unless specified
+        template: template || "modern-creative",
       },
     ])
     .select()

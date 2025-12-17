@@ -1,5 +1,6 @@
 // src/app/portfolio/public/[id]/page.tsx
 import { headers } from "next/headers";
+import PortfolioClientView from "../[id]/PortfolioClientView";
 
 interface Portfolio {
   id: string;
@@ -7,6 +8,7 @@ interface Portfolio {
   theme: any;
   sections: any[];
   owner_id: string;
+  template?: string;
 }
 
 export default async function PublicPortfolioPage({
@@ -27,24 +29,13 @@ export default async function PublicPortfolioPage({
 
   if (!res.ok) {
     return (
-      <div className='min-h-screen flex items-center justify-center bg-gray-50'>
-        <p className='text-slate-600 text-lg'>Public portfolio not found.</p>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <p className="text-slate-600 text-lg">Public portfolio not found.</p>
       </div>
     );
   }
 
   const portfolio: Portfolio = await res.json();
 
-  return (
-    <div className='min-h-screen bg-gray-50 p-8'>
-      <h1 className='text-3xl font-bold text-center mt-10'>
-        {portfolio.title}
-      </h1>
-      <pre className='mt-6 p-4 bg-white shadow rounded-lg max-w-2xl mx-auto'>
-        {JSON.stringify(portfolio, null, 2)}
-      </pre>
-    </div>
-  );
+  return <PortfolioClientView portfolio={portfolio} />;
 }
-
-

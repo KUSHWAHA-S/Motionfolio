@@ -1,0 +1,28 @@
+/* Outlined text style for studiofeixen font */
+/* If you have a custom studiofeixen font file, add @font-face here */
+/* 
+@font-face {
+  font-family: 'studiofeixen';
+  src: url('/fonts/studiofeixen.woff2') format('woff2'),
+       url('/fonts/studiofeixen.woff') format('woff');
+  font-weight: 400 900;
+  font-stretch: 100% 150%;
+  font-style: normal;
+}
+*/
+
+.outlined-text {
+  font-family: "Saira Condensed", "Saira", Arial, Helvetica, sans-serif;
+  -webkit-text-stroke: 1px #606887;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 400;
+}
+
+/* Override for name and designation - no outline */
+.no-outline {
+  -webkit-text-stroke: none !important;
+  -webkit-text-fill-color: inherit !important;
+  color: inherit !important;
+}
+

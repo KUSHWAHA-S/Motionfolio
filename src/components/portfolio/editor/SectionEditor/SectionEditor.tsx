@@ -1,14 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { HeroEditor } from "./editors/HeroEditor";
-import { AboutEditor } from "./editors/AboutEditor";
-import { ProjectEditor } from "./editors/ProjectEditor";
-import { ExperienceEditor } from "./editors/ExperienceEditor";
-import { SkillsEditor } from "./editors/SkillsEditor";
-import { ThemeEditor } from "./editors/ThemeEditor";
+import { HeroEditor } from "../HeroEditor/HeroEditor";
+import { AboutEditor } from "../AboutEditor/AboutEditor";
+import { ProjectEditor } from "../ProjectEditor/ProjectEditor";
+import { ExperienceEditor } from "../ExperienceEditor/ExperienceEditor";
+import { SkillsEditor } from "../SkillsEditor/SkillsEditor";
+import { ThemeEditor } from "../ThemeEditor/ThemeEditor";
+import { TemplateEditor } from "../TemplateEditor/TemplateEditor";
 
-type SectionType = "hero" | "about" | "projects" | "experience" | "skills" | "theme";
+type SectionType =
+  | "hero"
+  | "about"
+  | "projects"
+  | "experience"
+  | "skills"
+  | "theme"
+  | "template";
 
 interface SectionEditorProps {
   section: SectionType;
@@ -30,7 +38,7 @@ export function SectionEditor({ section }: SectionEditorProps) {
       {section === "experience" && <ExperienceEditor />}
       {section === "skills" && <SkillsEditor />}
       {section === "theme" && <ThemeEditor />}
+      {section === "template" && <TemplateEditor />}
     </motion.div>
   );
 }
-

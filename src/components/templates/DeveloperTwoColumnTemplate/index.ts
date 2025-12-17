@@ -1,0 +1,1 @@
+export { DeveloperTwoColumnTemplate } from "./DeveloperTwoColumnTemplate";

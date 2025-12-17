@@ -1,0 +1,9 @@
+/* Variable font hover effect for MinimalShowcase title */
+.minimal-title {
+  font-variation-settings: "wght" 400, "wdth" 100;
+  transition: font-variation-settings 0.4s ease;
+}
+
+.minimal-title:hover {
+  font-variation-settings: "wght" 900, "wdth" 130;
+}

@@ -1,7 +1,7 @@
 // src/app/portfolio/[id]/page.tsx
-import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { getSupabaseServerClient } from "@/lib/supabaseServer";
+import PortfolioClientView from "./PortfolioClientView";
 
 interface Portfolio {
   id: string;
@@ -53,14 +53,6 @@ export default async function PrivatePortfolioPage({
     portfolio = await publicRes.json();
   }
 
-  return (
-    <div className='min-h-screen bg-gray-50 p-8'>
-      <h1 className='text-3xl font-bold text-center mt-10'>
-        {portfolio.title}
-      </h1>
-      <pre className='mt-6 p-4 bg-white shadow rounded-lg max-w-2xl mx-auto'>
-        {JSON.stringify(portfolio, null, 2)}
-      </pre>
-    </div>
-  );
+  // At this point we have a concrete portfolio object (either private or public)
+  return <PortfolioClientView portfolio={portfolio as Portfolio} />;
 }

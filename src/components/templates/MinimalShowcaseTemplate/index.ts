@@ -1,0 +1,1 @@
+export { MinimalShowcaseTemplate } from "./MinimalShowcaseTemplate";

@@ -16,30 +16,30 @@ export default function NavBar() {
   };
 
   return (
-    <nav className='w-full px-6 py-3 flex items-center justify-between bg-white shadow-sm'>
-      <div className='flex items-center gap-4'>
-        <Link href='/' className='font-bold text-lg'>
+    <nav className="w-full h-[60px] px-6 py-3 flex items-center justify-between bg-white shadow-sm sticky top-0 z-30">
+      <div className="flex items-center gap-4">
+        <Link href="/" className="font-bold text-lg">
           Motionfolio
         </Link>
-        <Link href='/dashboard' className='text-sm text-slate-600'>
+        <Link href="/dashboard" className="text-sm text-slate-600">
           Dashboard
         </Link>
       </div>
 
-      <div className='flex items-center gap-4'>
+      <div className="flex items-center gap-4">
         {user ? (
           <>
-            <Link href='/dashboard' className='text-sm text-slate-700'>
+            <Link href="/dashboard" className="text-sm text-slate-700">
               Hi,{" "}
               {user.user_metadata?.preferred_username ??
                 user.email?.split("@")[0]}
             </Link>
-            <button onClick={handleSignOut} className='text-sm text-red-600'>
+            <button onClick={handleSignOut} className="text-sm text-red-600">
               Sign out
             </button>
           </>
         ) : (
-          <Link href='/auth/login' className='text-sm text-slate-700'>
+          <Link href="/auth/login" className="text-sm text-slate-700">
             Log in
           </Link>
         )}
