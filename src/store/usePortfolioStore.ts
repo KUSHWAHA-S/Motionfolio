@@ -1,5 +1,6 @@
 // src/store/usePortfolioStore.ts
 import { create } from "zustand";
+import { defaultTheme } from "@/lib/colors";
 
 export type Section = {
   id: string;
@@ -35,7 +36,7 @@ export interface PortfolioState {
 
 export const usePortfolioStore = create<PortfolioState>((set) => ({
   title: "Untitled Portfolio",
-  theme: { primary: "#0EA5E9", secondary: "#1E293B" },
+  theme: defaultTheme, // Uses centralized colors
   sections: [],
    // Current default template – this is the existing LivePreview design
   template: "modern-creative",
@@ -59,7 +60,7 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
   reset: () =>
     set({
       title: "Untitled Portfolio",
-      theme: { primary: "#0EA5E9", secondary: "#1E293B" },
+      theme: defaultTheme, // Uses centralized colors
       sections: [],
       template: "modern-creative",
     }),

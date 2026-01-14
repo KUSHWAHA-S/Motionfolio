@@ -5,18 +5,54 @@ import { motion } from "framer-motion";
 import { Palette, Sparkles } from "lucide-react";
 
 const presetThemes = [
-  { name: "Ocean", primary: "#0EA5E9", secondary: "#1E293B", background: "#FFFFFF", text: "#1F2937" },
-  { name: "Forest", primary: "#10B981", secondary: "#064E3B", background: "#FFFFFF", text: "#1F2937" },
-  { name: "Sunset", primary: "#F59E0B", secondary: "#92400E", background: "#FFFFFF", text: "#1F2937" },
-  { name: "Purple", primary: "#8B5CF6", secondary: "#4C1D95", background: "#FFFFFF", text: "#1F2937" },
-  { name: "Rose", primary: "#F43F5E", secondary: "#881337", background: "#FFFFFF", text: "#1F2937" },
-  { name: "Dark", primary: "#6366F1", secondary: "#1E293B", background: "#0F172A", text: "#F1F5F9" },
+  {
+    name: "Turquoise",
+    primary: "#40E0D0",
+    secondary: "#20B2AA",
+    background: "#FFFFFF",
+    text: "#1A1A1A",
+  },
+  {
+    name: "Aqua",
+    primary: "#48D1CC",
+    secondary: "#20B2AA",
+    background: "#FFFFFF",
+    text: "#1A1A1A",
+  },
+  {
+    name: "Teal",
+    primary: "#20B2AA",
+    secondary: "#008B8B",
+    background: "#FFFFFF",
+    text: "#1A1A1A",
+  },
+  {
+    name: "Cyan",
+    primary: "#00CED1",
+    secondary: "#40E0D0",
+    background: "#FFFFFF",
+    text: "#1A1A1A",
+  },
+  {
+    name: "Ocean",
+    primary: "#5F9EA0",
+    secondary: "#4682B4",
+    background: "#FFFFFF",
+    text: "#1A1A1A",
+  },
+  {
+    name: "Dark",
+    primary: "#40E0D0",
+    secondary: "#20B2AA",
+    background: "#1A1A1A",
+    text: "#E5E7EB",
+  },
 ];
 
 export function ThemeEditor() {
   const { theme, setTheme } = usePortfolioStore();
 
-  const applyPreset = (preset: typeof presetThemes[0]) => {
+  const applyPreset = (preset: (typeof presetThemes)[0]) => {
     setTheme({
       primary: preset.primary,
       secondary: preset.secondary,
@@ -26,12 +62,19 @@ export function ThemeEditor() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3 mb-6">
-        <div className="p-2 bg-pink-100 rounded-lg">
-          <Palette className="w-5 h-5 text-pink-600" />
+        <div
+          className="p-2 rounded-lg"
+          style={{ backgroundColor: "rgba(64, 224, 208, 0.1)" }}
+        >
+          <Palette className="w-5 h-5" style={{ color: "#40E0D0" }} />
         </div>
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Theme & Styling</h2>
-          <p className="text-sm text-gray-500">Customize your portfolio's look</p>
+          <h2 className="text-xl font-semibold" style={{ color: "#1A1A1A" }}>
+            Theme & Styling
+          </h2>
+          <p className="text-sm" style={{ color: "#6B7280" }}>
+            Customize your portfolio's look
+          </p>
         </div>
       </div>
 
@@ -42,7 +85,10 @@ export function ThemeEditor() {
       >
         {/* Preset Themes */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+          <label
+            className="block text-sm font-medium mb-3"
+            style={{ color: "#1A1A1A" }}
+          >
             Preset Themes
           </label>
           <div className="grid grid-cols-3 gap-3">
@@ -52,17 +98,22 @@ export function ThemeEditor() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => applyPreset(preset)}
-                className={`p-4 rounded-xl border-2 transition-all ${
-                  theme.primary === preset.primary
-                    ? "border-gray-900 shadow-lg"
-                    : "border-gray-200 hover:border-gray-300"
+                className={`p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                  theme.primary === preset.primary ? "shadow-lg" : ""
                 }`}
+                style={{
+                  borderColor:
+                    theme.primary === preset.primary ? "#40E0D0" : "#E5E7EB",
+                }}
               >
                 <div
                   className="w-full h-20 rounded-lg mb-2"
                   style={{ backgroundColor: preset.primary }}
                 />
-                <div className="text-xs font-medium text-gray-700">
+                <div
+                  className="text-xs font-medium"
+                  style={{ color: "#1A1A1A" }}
+                >
                   {preset.name}
                 </div>
               </motion.button>
@@ -73,7 +124,10 @@ export function ThemeEditor() {
         {/* Custom Colors */}
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: "#1A1A1A" }}
+            >
               Primary Color
             </label>
             <div className="flex items-center gap-4">
@@ -81,26 +135,34 @@ export function ThemeEditor() {
                 type="color"
                 value={theme.primary}
                 onChange={(e) => setTheme({ primary: e.target.value })}
-                className="w-16 h-16 rounded-lg border-2 border-gray-200 cursor-pointer"
+                className="w-16 h-16 rounded-lg border-2 cursor-pointer"
+                style={{ borderColor: "#E5E7EB" }}
               />
               <div className="flex-1">
                 <input
                   type="text"
                   value={theme.primary}
                   onChange={(e) => setTheme({ primary: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg font-mono text-sm"
-                  placeholder="#0EA5E9"
+                  className="w-full px-3 py-2 border rounded-lg font-mono text-sm"
+                  style={{ borderColor: "#E5E7EB", color: "#1A1A1A" }}
+                  placeholder="#40E0D0"
                 />
               </div>
               <div
-                className="w-12 h-12 rounded-lg border border-gray-200"
-                style={{ backgroundColor: theme.primary }}
+                className="w-12 h-12 rounded-lg border"
+                style={{
+                  backgroundColor: theme.primary,
+                  borderColor: "#E5E7EB",
+                }}
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: "#1A1A1A" }}
+            >
               Secondary Color
             </label>
             <div className="flex items-center gap-4">
@@ -108,20 +170,25 @@ export function ThemeEditor() {
                 type="color"
                 value={theme.secondary}
                 onChange={(e) => setTheme({ secondary: e.target.value })}
-                className="w-16 h-16 rounded-lg border-2 border-gray-200 cursor-pointer"
+                className="w-16 h-16 rounded-lg border-2 cursor-pointer"
+                style={{ borderColor: "#E5E7EB" }}
               />
               <div className="flex-1">
                 <input
                   type="text"
                   value={theme.secondary}
                   onChange={(e) => setTheme({ secondary: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg font-mono text-sm"
-                  placeholder="#1E293B"
+                  className="w-full px-3 py-2 border rounded-lg font-mono text-sm"
+                  style={{ borderColor: "#E5E7EB", color: "#1A1A1A" }}
+                  placeholder="#20B2AA"
                 />
               </div>
               <div
-                className="w-12 h-12 rounded-lg border border-gray-200"
-                style={{ backgroundColor: theme.secondary }}
+                className="w-12 h-12 rounded-lg border"
+                style={{
+                  backgroundColor: theme.secondary,
+                  borderColor: "#E5E7EB",
+                }}
               />
             </div>
           </div>
@@ -129,10 +196,16 @@ export function ThemeEditor() {
 
         {/* Preview */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            className="block text-sm font-medium mb-2"
+            style={{ color: "#1A1A1A" }}
+          >
             Theme Preview
           </label>
-          <div className="p-6 rounded-xl border border-gray-200 bg-white">
+          <div
+            className="p-6 rounded-xl border bg-white"
+            style={{ borderColor: "#E5E7EB" }}
+          >
             <div
               className="p-4 rounded-lg mb-3"
               style={{ backgroundColor: theme.primary, color: "#FFFFFF" }}
@@ -153,4 +226,3 @@ export function ThemeEditor() {
     </div>
   );
 }
-

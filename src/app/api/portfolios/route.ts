@@ -1,6 +1,7 @@
 // src/app/api/portfolios/route.ts
 import { NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabaseServer";
+import { defaultTheme } from "@/lib/colors";
 
 export async function GET() {
   const supabase = await getSupabaseServerClient();
@@ -70,7 +71,7 @@ export async function POST(req: Request) {
     .insert([
       {
         title: title || "Untitled Portfolio",
-        theme: theme || { primary: "#0EA5E9", secondary: "#1E293B" },
+        theme: theme || defaultTheme,
         owner_id: user.id,
         sections: [],
         is_public: false,

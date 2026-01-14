@@ -24,7 +24,8 @@ export async function middleware(request: NextRequest) {
     }
   );
 
-  await supabase.auth.getUser(); // forces cookie propagation
+  // Refresh session if expired - this ensures cookies are updated
+  await supabase.auth.getSession();
 
   return response;
 }

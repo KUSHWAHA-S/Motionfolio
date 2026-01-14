@@ -28,7 +28,26 @@ export function usePortfolioSync(portfolioId: string) {
           template: data.template,
         }),
       });
-      if (!res.ok) throw new Error(await res.text());
+      
+      if (!res.ok) {
+        // Try to parse error message from response
+        let errorMessage = `Failed to save portfolio (${res.status})`;
+        try {
+          const errorData = await res.json().catch(() => null);
+          if (errorData?.error) {
+            errorMessage = errorData.error;
+          } else {
+            const errorText = await res.text().catch(() => null);
+            if (errorText) {
+              errorMessage = errorText;
+            }
+          }
+        } catch {
+          // If parsing fails, use default message
+        }
+        throw new Error(errorMessage);
+      }
+      
       setSaveStatus("saved");
       // Reset to idle after 2 seconds
       setTimeout(() => setSaveStatus("idle"), 2000);

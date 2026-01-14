@@ -32,16 +32,21 @@ export function TemplateEditor() {
   const { template, setTemplate } = usePortfolioStore();
 
   return (
-    <div className='space-y-6'>
-      <div className='flex items-center gap-3 mb-6'>
-        <div className='p-2 bg-indigo-100 rounded-lg'>
-          <LayoutTemplate className='w-5 h-5 text-indigo-600' />
+    <div className="space-y-6">
+      <div className="flex items-center gap-3 mb-6">
+        <div
+          className="p-2 rounded-lg"
+          style={{ backgroundColor: "rgba(64, 224, 208, 0.1)" }}
+        >
+          <LayoutTemplate className="w-5 h-5" style={{ color: "#40E0D0" }} />
         </div>
         <div>
-          <h2 className='text-xl font-semibold text-gray-900'>Templates</h2>
-          <p className='text-sm text-gray-500'>
-            Choose a layout for your portfolio. Your content will flow into the selected
-            template.
+          <h2 className="text-xl font-semibold" style={{ color: "#1A1A1A" }}>
+            Templates
+          </h2>
+          <p className="text-sm" style={{ color: "#6B7280" }}>
+            Choose a layout for your portfolio. Your content will flow into the
+            selected template.
           </p>
         </div>
       </div>
@@ -49,7 +54,7 @@ export function TemplateEditor() {
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className='grid grid-cols-1 md:grid-cols-2 gap-4'
+        className="grid grid-cols-1 md:grid-cols-2 gap-4"
       >
         {templates.map((tpl) => {
           const isActive = template === tpl.id;
@@ -59,16 +64,29 @@ export function TemplateEditor() {
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setTemplate(tpl.id)}
-              className={`w-full text-left rounded-2xl border transition-all p-4 ${
-                isActive
-                  ? "border-gray-900 bg-gray-900 text-white shadow-xl"
-                  : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-md text-gray-900"
+              className={`w-full text-left rounded-2xl border transition-all p-4 cursor-pointer ${
+                isActive ? "shadow-xl" : "hover:shadow-md"
               }`}
+              style={{
+                borderColor: isActive ? "#40E0D0" : "#E5E7EB",
+                backgroundColor: isActive ? "#40E0D0" : "#FFFFFF",
+                color: isActive ? "#FFFFFF" : "#1A1A1A",
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.borderColor = "#40E0D0";
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.borderColor = "#E5E7EB";
+                }
+              }}
             >
-              <div className='flex items-center justify-between mb-3'>
-                <h3 className='font-semibold text-base'>{tpl.name}</h3>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-semibold text-base">{tpl.name}</h3>
                 {isActive && (
-                  <span className='text-[11px] font-medium px-2 py-1 rounded-full bg-white/10 border border-white/30'>
+                  <span className="text-[11px] font-medium px-2 py-1 rounded-full bg-white/10 border border-white/30">
                     Selected
                   </span>
                 )}
@@ -83,15 +101,17 @@ export function TemplateEditor() {
               {/* Simple visual hint of layout */}
               <div
                 className={`rounded-xl border ${
-                  isActive ? "border-white/30 bg-white/5" : "border-dashed border-gray-300"
+                  isActive
+                    ? "border-white/30 bg-white/5"
+                    : "border-dashed border-gray-300"
                 } p-3 space-y-2 bg-gradient-to-br from-gray-50 to-gray-100`}
               >
-                <div className='h-6 rounded-md bg-gray-800/80 mb-1' />
-                <div className='h-3 w-2/3 rounded-md bg-gray-400/70' />
-                <div className='grid grid-cols-3 gap-2 mt-2'>
-                  <div className='h-10 rounded-md bg-gray-300/80' />
-                  <div className='h-10 rounded-md bg-gray-300/80' />
-                  <div className='h-10 rounded-md bg-gray-300/80' />
+                <div className="h-6 rounded-md bg-gray-800/80 mb-1" />
+                <div className="h-3 w-2/3 rounded-md bg-gray-400/70" />
+                <div className="grid grid-cols-3 gap-2 mt-2">
+                  <div className="h-10 rounded-md bg-gray-300/80" />
+                  <div className="h-10 rounded-md bg-gray-300/80" />
+                  <div className="h-10 rounded-md bg-gray-300/80" />
                 </div>
               </div>
             </motion.button>
@@ -101,5 +121,3 @@ export function TemplateEditor() {
     </div>
   );
 }
-
-

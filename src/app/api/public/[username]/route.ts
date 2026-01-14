@@ -1,13 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { getSupabaseServiceRoleClient } from "@/lib/supabaseServiceRole";
 
-type Params = {
-  params: { username: string };
-};
-
-export async function GET(_request: Request, { params }: Params) {
+export async function GET(
+  _request: NextRequest,
+  { params }: { params: Promise<{ username: string }> }
+) {
+  const { username } = await params;
   const supabase = getSupabaseServiceRoleClient();
-  const { username } = params;
 
   const {
     data: profile,

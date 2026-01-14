@@ -5,6 +5,7 @@ import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { ModernCreativeTemplate } from "@/components/templates/ModernCreativeTemplate";
 import { MinimalShowcaseTemplate } from "@/components/templates/MinimalShowcaseTemplate";
 import { DeveloperTwoColumnTemplate } from "@/components/templates/DeveloperTwoColumnTemplate";
+import { defaultTheme } from "@/lib/colors";
 
 interface Portfolio {
   id: string;
@@ -28,7 +29,7 @@ export default function PortfolioClientView({
   useEffect(() => {
     load({
       title: portfolio.title || "Untitled Portfolio",
-      theme: portfolio.theme || { primary: "#0EA5E9", secondary: "#1E293B" },
+      theme: portfolio.theme || defaultTheme,
       sections: portfolio.sections || [],
       template: portfolio.template || "modern-creative",
     });

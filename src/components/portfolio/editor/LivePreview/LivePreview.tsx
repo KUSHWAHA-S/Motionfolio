@@ -120,10 +120,18 @@ export function LivePreview({
   return (
     <div className={containerClassName}>
       {showHeader && (
-        <div className="sticky top-0 z-20 bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+        <div
+          className="sticky top-0 z-20 border-b px-6 py-4 flex items-center justify-between"
+          style={{
+            background: "linear-gradient(to right, #F9FAFB, #FFFFFF)",
+            borderColor: "#E5E7EB",
+          }}
+        >
           <div>
-            <h3 className="font-semibold text-gray-900">Portfolio Preview</h3>
-            <p className="text-xs text-gray-500 mt-0.5">
+            <h3 className="font-semibold" style={{ color: "#1A1A1A" }}>
+              Portfolio Preview
+            </h3>
+            <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
               Live preview with GSAP animations
             </p>
           </div>
@@ -183,7 +191,7 @@ export function LivePreview({
                   href={heroSection.data.ctaLink || "#"}
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white text-lg shadow-2xl hover:scale-105 transition-transform hero-element"
                   style={{
-                    backgroundColor: theme.primary || "#0EA5E9",
+                    backgroundColor: theme.primary || "#40E0D0",
                     boxShadow: `0 10px 40px ${theme.primary}40`,
                   }}
                   whileHover={{ scale: 1.05 }}
@@ -210,7 +218,7 @@ export function LivePreview({
               >
                 <h2
                   className="text-5xl font-bold mb-6"
-                  style={{ color: theme.primary || "#0EA5E9" }}
+                  style={{ color: theme.primary || "#40E0D0" }}
                 >
                   About Me
                 </h2>
@@ -317,7 +325,7 @@ export function LivePreview({
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 text-sm font-semibold hover:gap-3 transition-all"
-                            style={{ color: theme.primary || "#0EA5E9" }}
+                            style={{ color: theme.primary || "#40E0D0" }}
                           >
                             View Project <ArrowRight className="w-4 h-4" />
                           </a>
@@ -351,7 +359,7 @@ export function LivePreview({
               >
                 <h2
                   className="text-5xl font-bold mb-6"
-                  style={{ color: theme.primary || "#0EA5E9" }}
+                  style={{ color: theme.primary || "#40E0D0" }}
                 >
                   Experience
                 </h2>
@@ -385,7 +393,7 @@ export function LivePreview({
                         </h3>
                         <p
                           className="text-lg font-semibold mb-2"
-                          style={{ color: theme.primary || "#0EA5E9" }}
+                          style={{ color: theme.primary || "#40E0D0" }}
                         >
                           {exp.company || ""}
                         </p>
@@ -442,7 +450,7 @@ export function LivePreview({
                       key={idx}
                       className="skill-tag px-6 py-3 rounded-full text-base font-semibold text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all cursor-default"
                       style={{
-                        backgroundColor: theme.primary || "#0EA5E9",
+                        backgroundColor: theme.primary || "#40E0D0",
                         color: "#ffffff",
                         opacity: 1,
                       }}

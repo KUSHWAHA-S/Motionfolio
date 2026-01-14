@@ -10,11 +10,10 @@ export async function GET(
 
   try {
     const {
-      data:user1,
+      data: { user },
       error: userError,
     } = await supabase.auth.getUser();
-    const { user } = user1;
-console.log(user1 , 'user')
+
     if (userError || !user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -103,6 +102,7 @@ export async function PUT(
 }
 
 export async function DELETE(
+  _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const supabase = await getSupabaseServerClient();

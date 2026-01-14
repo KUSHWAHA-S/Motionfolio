@@ -56,19 +56,33 @@ export function ExperienceEditor() {
     <div className="space-y-6">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-orange-100 rounded-lg">
-            <Briefcase className="w-5 h-5 text-orange-600" />
+          <div
+            className="p-2 rounded-lg"
+            style={{ backgroundColor: "rgba(64, 224, 208, 0.1)" }}
+          >
+            <Briefcase className="w-5 h-5" style={{ color: "#40E0D0" }} />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-gray-900">Experience</h2>
-            <p className="text-sm text-gray-500">Your professional journey</p>
+            <h2 className="text-xl font-semibold" style={{ color: "#1A1A1A" }}>
+              Experience
+            </h2>
+            <p className="text-sm" style={{ color: "#6B7280" }}>
+              Your professional journey
+            </p>
           </div>
         </div>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={addExperience}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 text-white rounded-lg transition-colors cursor-pointer"
+          style={{ backgroundColor: "#40E0D0" }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "#20B2AA";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "#40E0D0";
+          }}
         >
           <Plus className="w-4 h-4" />
           Add Experience
@@ -111,7 +125,7 @@ export function ExperienceEditor() {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => removeExperience(exp.id)}
-                    className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
                   >
                     <Trash2 className="w-4 h-4" />
                   </motion.button>
@@ -202,4 +216,3 @@ export function ExperienceEditor() {
     </div>
   );
 }
-

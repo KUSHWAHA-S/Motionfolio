@@ -1,6 +1,6 @@
 // src/app/portfolio/public/[id]/page.tsx
-import { headers } from "next/headers";
-import PortfolioClientView from "../[id]/PortfolioClientView";
+import PortfolioClientView from "../../[id]/PortfolioClientView";
+import { getSupabaseServerClient } from "@/lib/supabaseServer";
 
 interface Portfolio {
   id: string;
@@ -17,25 +17,31 @@ export default async function PublicPortfolioPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const supabase = await getSupabaseServerClient({ enableCookieWrite: false });
 
-  const headerList = await headers();
-  const host = headerList.get("host");
-  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
-  const baseUrl = `${protocol}://${host}`;
+  try {
+    const { data: portfolio, error } = await supabase
+      .from("portfolios")
+      .select("*")
+      .eq("id", id)
+      .eq("is_public", true)
+      .single();
 
-  const res = await fetch(`${baseUrl}/api/portfolios/public/${id}`, {
-    cache: "no-store",
-  });
+    if (error || !portfolio) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+          <p className="text-slate-600 text-lg">Public portfolio not found.</p>
+        </div>
+      );
+    }
 
-  if (!res.ok) {
+    return <PortfolioClientView portfolio={portfolio as Portfolio} />;
+  } catch (err) {
+    console.error("Error loading public portfolio:", err);
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <p className="text-slate-600 text-lg">Public portfolio not found.</p>
+        <p className="text-slate-600 text-lg">Error loading portfolio.</p>
       </div>
     );
   }
-
-  const portfolio: Portfolio = await res.json();
-
-  return <PortfolioClientView portfolio={portfolio} />;
 }

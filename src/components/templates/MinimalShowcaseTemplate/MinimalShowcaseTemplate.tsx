@@ -208,18 +208,17 @@ export function MinimalShowcaseTemplate({
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Overlay Menu - only show when not in editor mode */}
-      {!showHeader && (
-        <OverlayMenu
-          isOpen={isMenuOpen}
-          onClose={() => setIsMenuOpen(!isMenuOpen)}
-          onNavigate={handleNavigate}
-          sections={menuSections}
-        />
-      )}
+      {/* Overlay Menu - always visible, position adjusts based on showHeader */}
+      <OverlayMenu
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(!isMenuOpen)}
+        onNavigate={handleNavigate}
+        sections={menuSections}
+        showHeader={showHeader}
+      />
 
       {showHeader && (
-        <header className="sticky top-[60px] z-20 border-b border-slate-800 bg-slate-950/80 backdrop-blur">
+        <header className="sticky top-[70px] z-20 border-b border-slate-800 bg-slate-950/80 backdrop-blur">
           <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="text-xs md:text-sm font-semibold tracking-[0.18em] uppercase text-slate-400">
               Portfolio Template

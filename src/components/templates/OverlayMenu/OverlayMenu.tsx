@@ -9,6 +9,7 @@ interface OverlayMenuProps {
   onClose: () => void;
   onNavigate: (section: string) => void;
   sections: Array<{ id: string; label: string }>;
+  showHeader?: boolean;
 }
 
 export function OverlayMenu({
@@ -16,7 +17,9 @@ export function OverlayMenu({
   onClose,
   onNavigate,
   sections,
+  showHeader = false,
 }: OverlayMenuProps) {
+  const menuTopClass = showHeader ? "top-[90px]" : "top-[96px]";
   const overlayRef = useRef<HTMLDivElement>(null);
   const menuItemsRef = useRef<HTMLDivElement>(null);
   const menuIconRef = useRef<HTMLButtonElement>(null);
@@ -119,16 +122,28 @@ export function OverlayMenu({
 
   return (
     <>
-      {/* Menu Icon Button */}
+      {/* Menu Icon Button - position adjusts based on showHeader */}
       <button
         ref={menuIconRef}
         onClick={onClose}
-        className="fixed top-6 right-6 z-50 w-8 h-8 flex items-center justify-center cursor-pointer group"
+        className={`fixed right-6 z-50 w-10 h-10 flex items-center justify-center cursor-pointer group rounded-full backdrop-blur-sm border ${
+          menuTopClass
+        }`}
         aria-label={isOpen ? "Close menu" : "Open menu"}
         style={{
           opacity: 1,
           visibility: "visible",
           zIndex: 100,
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          borderColor: "rgba(255, 255, 255, 0.2)",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+          e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.4)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+          e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
         }}
       >
         <div className="relative w-6 h-6">
@@ -138,7 +153,7 @@ export function OverlayMenu({
             }`}
             style={{
               transformOrigin: "center",
-              backgroundColor: "#8A5D69",
+              backgroundColor: "#FFFFFF",
               opacity: 1,
             }}
           />
@@ -148,7 +163,7 @@ export function OverlayMenu({
             }`}
             style={{
               transformOrigin: "center",
-              backgroundColor: "#8A5D69",
+              backgroundColor: "#FFFFFF",
             }}
           />
           <span
@@ -157,7 +172,7 @@ export function OverlayMenu({
             }`}
             style={{
               transformOrigin: "center",
-              backgroundColor: "#8A5D69",
+              backgroundColor: "#FFFFFF",
               opacity: 1,
             }}
           />

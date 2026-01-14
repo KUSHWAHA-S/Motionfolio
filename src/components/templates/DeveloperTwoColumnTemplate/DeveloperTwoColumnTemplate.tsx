@@ -121,7 +121,7 @@ export function DeveloperTwoColumnTemplate({
       {/* Show cursor glow only in published view (not in editor preview) */}
       {!showHeader && <GlowCursor color={primary} />}
       {showHeader && (
-        <div className="sticky top-[60px] z-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+        <div className="sticky top-[70px] z-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
           <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between text-xs text-slate-400">
             <span>Developer two‑column template preview</span>
             <a

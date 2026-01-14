@@ -1,5 +1,4 @@
 // src/app/portfolio/[id]/page.tsx
-import { headers } from "next/headers";
 import { getSupabaseServerClient } from "@/lib/supabaseServer";
 import PortfolioClientView from "./PortfolioClientView";
 
@@ -35,22 +34,22 @@ export default async function PrivatePortfolioPage({
   }
 
   if (!portfolio) {
-    // Not authorized/owner, try public view via API (keep fallback for logic)
-    const headerList = await headers();
-    const host = headerList.get("host");
-    const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
-    const baseUrl = `${protocol}://${host}`;
-    const publicRes = await fetch(`${baseUrl}/api/portfolios/public/${id}`, {
-      cache: "no-store",
-    });
-    if (!publicRes.ok) {
+    // Not authorized/owner, try public view
+    const { data: publicPortfolio, error: publicError } = await supabase
+      .from("portfolios")
+      .select("*")
+      .eq("id", id)
+      .eq("is_public", true)
+      .single();
+    
+    if (publicError || !publicPortfolio) {
       return (
         <div className='min-h-screen flex items-center justify-center bg-gray-50'>
           <p className='text-slate-600 text-lg'>Portfolio not found.</p>
         </div>
       );
     }
-    portfolio = await publicRes.json();
+    portfolio = publicPortfolio;
   }
 
   // At this point we have a concrete portfolio object (either private or public)

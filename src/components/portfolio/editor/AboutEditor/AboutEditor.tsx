@@ -34,12 +34,19 @@ export function AboutEditor() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3 mb-6">
-        <div className="p-2 bg-purple-100 rounded-lg">
-          <User className="w-5 h-5 text-purple-600" />
+        <div
+          className="p-2 rounded-lg"
+          style={{ backgroundColor: "rgba(64, 224, 208, 0.1)" }}
+        >
+          <User className="w-5 h-5" style={{ color: "#40E0D0" }} />
         </div>
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">About Section</h2>
-          <p className="text-sm text-gray-500">Tell your story</p>
+          <h2 className="text-xl font-semibold" style={{ color: "#1A1A1A" }}>
+            About Section
+          </h2>
+          <p className="text-sm" style={{ color: "#6B7280" }}>
+            Tell your story
+          </p>
         </div>
       </div>
 
@@ -110,4 +117,3 @@ export function AboutEditor() {
     </div>
   );
 }
-

@@ -30,7 +30,8 @@ export function SectionEditor({ section }: SectionEditorProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
-      className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+      className="bg-white rounded-xl shadow-sm p-6"
+      style={{ border: "1px solid #E5E7EB" }}
     >
       {section === "hero" && <HeroEditor />}
       {section === "about" && <AboutEditor />}
