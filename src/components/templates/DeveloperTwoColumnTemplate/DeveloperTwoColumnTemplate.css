@@ -211,3 +211,7 @@
 
     /* hide fine detail on narrow screens */
 }
+
+.clip-path {
+    clip-path: polygon(0 0, 100% 0%, 100% 80%, 50% 100%, 0 80%);
+}
