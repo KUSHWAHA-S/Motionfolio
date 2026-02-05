@@ -8,15 +8,7 @@ import { ExperienceEditor } from "../ExperienceEditor/ExperienceEditor";
 import { SkillsEditor } from "../SkillsEditor/SkillsEditor";
 import { ThemeEditor } from "../ThemeEditor/ThemeEditor";
 import { TemplateEditor } from "../TemplateEditor/TemplateEditor";
-
-type SectionType =
-  | "hero"
-  | "about"
-  | "projects"
-  | "experience"
-  | "skills"
-  | "theme"
-  | "template";
+import { SectionType, SECTION_TYPES } from "@/types/constants";
 
 interface SectionEditorProps {
   section: SectionType;
@@ -33,13 +25,13 @@ export function SectionEditor({ section }: SectionEditorProps) {
       className="bg-white rounded-xl shadow-sm p-6"
       style={{ border: "1px solid #E5E7EB" }}
     >
-      {section === "hero" && <HeroEditor />}
-      {section === "about" && <AboutEditor />}
-      {section === "projects" && <ProjectEditor />}
-      {section === "experience" && <ExperienceEditor />}
-      {section === "skills" && <SkillsEditor />}
-      {section === "theme" && <ThemeEditor />}
-      {section === "template" && <TemplateEditor />}
+      {section === SECTION_TYPES.HERO && <HeroEditor />}
+      {section === SECTION_TYPES.ABOUT && <AboutEditor />}
+      {section === SECTION_TYPES.PROJECTS && <ProjectEditor />}
+      {section === SECTION_TYPES.EXPERIENCE && <ExperienceEditor />}
+      {section === SECTION_TYPES.SKILLS && <SkillsEditor />}
+      {section === SECTION_TYPES.THEME && <ThemeEditor />}
+      {section === SECTION_TYPES.TEMPLATE && <TemplateEditor />}
     </motion.div>
   );
 }

@@ -37,7 +37,7 @@ export default function DashboardPage() {
   };
 
   const handleCardClick = (id: string) => {
-    router.push(`/portfolio/${id}`);
+    window.open(`/portfolio/${id}`, '_blank', 'noopener,noreferrer');
   };
 
   if (error) return <p className="p-6">Failed to load portfolios.</p>;

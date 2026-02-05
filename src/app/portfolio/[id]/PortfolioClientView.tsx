@@ -6,15 +6,12 @@ import { ModernCreativeTemplate } from "@/components/templates/ModernCreativeTem
 import { MinimalShowcaseTemplate } from "@/components/templates/MinimalShowcaseTemplate";
 import { DeveloperTwoColumnTemplate } from "@/components/templates/DeveloperTwoColumnTemplate";
 import { defaultTheme } from "@/lib/colors";
-
-interface Portfolio {
-  id: string;
-  title: string;
-  theme: any;
-  sections: any[];
-  // Optional template identifier coming from the database (if present)
-  template?: string;
-}
+import { Portfolio } from "@/types/portfolio";
+import {
+  TEMPLATE_NAMES,
+  DEFAULT_TEMPLATE,
+  TemplateName,
+} from "@/types/constants";
 
 interface PortfolioClientViewProps {
   portfolio: Portfolio;
@@ -31,7 +28,7 @@ export default function PortfolioClientView({
       title: portfolio.title || "Untitled Portfolio",
       theme: portfolio.theme || defaultTheme,
       sections: portfolio.sections || [],
-      template: portfolio.template || "modern-creative",
+      template: portfolio.template || DEFAULT_TEMPLATE,
     });
     setInitialized(true);
 
@@ -49,29 +46,33 @@ export default function PortfolioClientView({
   }
 
   // Decide which template to render for the public view.
-  const templateId = portfolio.template || "modern-creative";
+  const templateId: TemplateName =
+    (portfolio.template as TemplateName) || DEFAULT_TEMPLATE;
 
   switch (templateId) {
-    case "minimal-showcase":
+    case TEMPLATE_NAMES.MINIMAL_SHOWCASE:
       return (
         <MinimalShowcaseTemplate
-          portfolioId={portfolio.id}
+          portfolioId={portfolio.id || ""}
           showHeader={false}
         />
       );
-    case "developer-two-column":
+    case TEMPLATE_NAMES.DEVELOPER_TWO_COLUMN:
       return (
         <DeveloperTwoColumnTemplate
-          portfolioId={portfolio.id}
+          portfolioId={portfolio.id || ""}
           showHeader={false}
         />
       );
-    case "modern-creative":
+    case TEMPLATE_NAMES.MODERN_CREATIVE:
     default:
       // Public portfolio view: render as a full portfolio site.
       // The app's global navbar/layout will remain above this.
       return (
-        <ModernCreativeTemplate portfolioId={portfolio.id} showHeader={false} />
+        <ModernCreativeTemplate
+          portfolioId={portfolio.id || ""}
+          showHeader={false}
+        />
       );
   }
 }

@@ -1,14 +1,19 @@
 import { NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabaseServer";
+import {
+  createErrorResponse,
+  createSuccessResponse,
+  handleApiError,
+} from "@/lib/apiUtils";
 
 export async function GET(
   _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const supabase = await getSupabaseServerClient({ enableCookieWrite: false });
-  const { id } = await params;
-
   try {
+    const supabase = await getSupabaseServerClient({ enableCookieWrite: false });
+    const { id } = await params;
+
     const { data, error } = await supabase
       .from("portfolios")
       .select("*")
@@ -17,19 +22,12 @@ export async function GET(
       .single();
 
     if (error || !data) {
-      return NextResponse.json(
-        { error: "Public portfolio not found" },
-        { status: 404 }
-      );
+      return createErrorResponse("Public portfolio not found", 404);
     }
 
-    return NextResponse.json(data);
-  } catch (err) {
-    console.error("Error fetching public portfolio:", err);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+    return createSuccessResponse(data);
+  } catch (error) {
+    return handleApiError(error);
   }
 }
 

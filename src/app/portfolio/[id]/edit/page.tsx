@@ -12,15 +12,8 @@ import { SaveIndicator } from "@/components/portfolio/editor/SaveIndicator";
 import { Eye, AlertCircle } from "lucide-react";
 import { defaultTheme } from "@/lib/colors";
 import Link from "next/link";
-
-type SectionType =
-  | "hero"
-  | "about"
-  | "projects"
-  | "experience"
-  | "skills"
-  | "theme"
-  | "template";
+import { SectionType, SECTION_TYPES } from "@/types/constants";
+import { DEFAULT_TEMPLATE } from "@/types/constants";
 
 export default function PortfolioEditPage({
   params,
@@ -29,7 +22,9 @@ export default function PortfolioEditPage({
 }) {
   const router = useRouter();
   const [portfolioId, setPortfolioId] = useState<string>("");
-  const [activeSection, setActiveSection] = useState<SectionType>("hero");
+  const [activeSection, setActiveSection] = useState<SectionType>(
+    SECTION_TYPES.HERO
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { load, reset, title, theme, sections } = usePortfolioStore();
@@ -77,9 +72,9 @@ export default function PortfolioEditPage({
         const data = await res.json();
         load({
           title: data.title || "Untitled Portfolio",
-          theme: data.theme || { primary: "#40E0D0", secondary: "#20B2AA" },
+          theme: data.theme || defaultTheme,
           sections: data.sections || [],
-          template: data.template || "modern-creative",
+          template: data.template || DEFAULT_TEMPLATE,
         });
         setLoading(false);
       } catch (err) {
@@ -170,11 +165,9 @@ export default function PortfolioEditPage({
                         const data = await res.json();
                         load({
                           title: data.title || "Untitled Portfolio",
-                          theme: data.theme || {
-                            ...defaultTheme,
-                          },
+                          theme: data.theme || defaultTheme,
                           sections: data.sections || [],
-                          template: data.template || "modern-creative",
+                          template: data.template || DEFAULT_TEMPLATE,
                         });
                         setLoading(false);
                         setError(null);
@@ -215,7 +208,7 @@ export default function PortfolioEditPage({
   return (
     <ProtectedRoute>
       <div
-        className="h-[calc(100vh-70px)] mt-[70px] flex overflow-hidden"
+        className="h-[calc(100vh-70px)] flex overflow-hidden"
         style={{ backgroundColor: "#F9FAFB" }}
       >
         {/* Sidebar */}
@@ -241,10 +234,10 @@ export default function PortfolioEditPage({
                 <div className="flex items-center gap-4">
                   <SaveIndicator status={saveStatus} />
                   {portfolioId && (
-                    <Link
-                      href={`/portfolio/${portfolioId}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={() => {
+                        window.open(`/portfolio/${portfolioId}`, '_blank', 'noopener,noreferrer');
+                      }}
                       className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors font-medium text-sm"
                       style={{
                         backgroundColor: "#40E0D0",
@@ -259,7 +252,7 @@ export default function PortfolioEditPage({
                     >
                       <Eye className="w-4 h-4" />
                       Preview Portfolio
-                    </Link>
+                    </button>
                   )}
                 </div>
               </div>

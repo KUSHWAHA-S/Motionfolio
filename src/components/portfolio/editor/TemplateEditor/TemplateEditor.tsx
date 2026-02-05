@@ -3,30 +3,31 @@
 import { motion } from "framer-motion";
 import { LayoutTemplate } from "lucide-react";
 import { usePortfolioStore } from "@/store/usePortfolioStore";
+import { TEMPLATE_NAMES, TemplateName } from "@/types/constants";
 
 const templates = [
   {
-    id: "modern-creative",
+    id: TEMPLATE_NAMES.MODERN_CREATIVE,
     name: "Modern Creative",
     description:
       "Bold hero, animated sections and cards. Great for designers & developers.",
     badge: "Current",
   },
   {
-    id: "minimal-showcase",
+    id: TEMPLATE_NAMES.MINIMAL_SHOWCASE,
     name: "Minimal Showcase",
     description:
       "Clean, typography-focused layout. Great for simple portfolios and resumes.",
     badge: "New",
   },
   {
-    id: "developer-two-column",
+    id: TEMPLATE_NAMES.DEVELOPER_TWO_COLUMN,
     name: "Developer Two-Column",
     description:
       "Dark, professional two-column layout with sidebar nav and focused content sections.",
     badge: "Pro",
   },
-];
+] as const;
 
 export function TemplateEditor() {
   const { template, setTemplate } = usePortfolioStore();
@@ -63,7 +64,7 @@ export function TemplateEditor() {
               key={tpl.id}
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => setTemplate(tpl.id)}
+              onClick={() => setTemplate(tpl.id as TemplateName)}
               className={`w-full text-left rounded-2xl border transition-all p-4 cursor-pointer ${
                 isActive ? "shadow-xl" : "hover:shadow-md"
               }`}

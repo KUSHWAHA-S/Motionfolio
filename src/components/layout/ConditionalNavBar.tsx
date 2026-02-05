@@ -20,6 +20,14 @@ export default function ConditionalNavBar() {
     pathname?.startsWith(route)
   );
 
+  // Hide navbar on portfolio preview pages (/portfolio/[id]) but not on edit pages
+  // Pattern: /portfolio/[id] but not /portfolio/[id]/edit
+  const isPortfolioPreviewPage =
+    pathname &&
+    pathname.match(/^\/portfolio\/[^\/]+$/) &&
+    !pathname.includes("/edit") &&
+    !pathname.includes("/public");
+
   // Also hide on username routes (public profiles) - these are published portfolios
   // Pattern: /username (single segment, not /dashboard, /auth, /portfolio, etc.)
   const isUsernameRoute =
@@ -32,7 +40,7 @@ export default function ConditionalNavBar() {
     !pathname.startsWith("/verify-otp") &&
     pathname !== "/";
 
-  if (shouldHideNavbar || isUsernameRoute) {
+  if (shouldHideNavbar || isPortfolioPreviewPage || isUsernameRoute) {
     return null;
   }
 

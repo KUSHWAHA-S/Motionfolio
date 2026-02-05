@@ -6,35 +6,41 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { LayoutTemplate } from "lucide-react";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import { defaultTheme, colors } from "@/lib/colors";
+import { defaultTheme } from "@/lib/colors";
+import {
+  TEMPLATE_NAMES,
+  DEFAULT_TEMPLATE,
+  TemplateName,
+} from "@/types/constants";
 
 const templates = [
   {
-    id: "modern-creative",
+    id: TEMPLATE_NAMES.MODERN_CREATIVE,
     name: "Modern Creative",
     description:
       "Bold hero, animated sections and cards. Great for designers & developers.",
     badge: "Popular",
   },
   {
-    id: "minimal-showcase",
+    id: TEMPLATE_NAMES.MINIMAL_SHOWCASE,
     name: "Minimal Showcase",
     description:
       "Clean, typography-focused layout. Great for simple portfolios and resumes.",
     badge: "New",
   },
   {
-    id: "developer-two-column",
+    id: TEMPLATE_NAMES.DEVELOPER_TWO_COLUMN,
     name: "Developer Two-Column",
     description:
       "Dark, professional two-column layout with sidebar nav and focused content sections.",
     badge: "Pro",
   },
-];
+] as const;
 
 export default function NewPortfolioPage() {
   const [title, setTitle] = useState("");
-  const [selectedTemplate, setSelectedTemplate] = useState("modern-creative");
+  const [selectedTemplate, setSelectedTemplate] =
+    useState<TemplateName>(DEFAULT_TEMPLATE);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 

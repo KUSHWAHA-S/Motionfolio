@@ -1,22 +1,16 @@
 // src/store/usePortfolioStore.ts
 import { create } from "zustand";
 import { defaultTheme } from "@/lib/colors";
-
-export type Section = {
-  id: string;
-  type: string;
-  data: any;
-  animation: any;
-};
-
-export interface Theme {
-  primary: string;
-  secondary: string;
-}
+import {
+  Section,
+  PortfolioTheme,
+  Portfolio,
+} from "@/types/portfolio";
+import { DEFAULT_TEMPLATE } from "@/types/constants";
 
 export interface PortfolioState {
   title: string;
-  theme: Theme;
+  theme: PortfolioTheme;
   sections: Section[];
   /**
    * Identifier for the visual template used to render this portfolio.
@@ -25,7 +19,7 @@ export interface PortfolioState {
   template: string;
 
   setTitle: (title: string) => void;
-  setTheme: (theme: Partial<Theme>) => void;
+  setTheme: (theme: Partial<PortfolioTheme>) => void;
   addSection: (section: Section) => void;
   updateSection: (id: string, section: Partial<Section>) => void;
   removeSection: (id: string) => void;
@@ -38,8 +32,8 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
   title: "Untitled Portfolio",
   theme: defaultTheme, // Uses centralized colors
   sections: [],
-   // Current default template – this is the existing LivePreview design
-  template: "modern-creative",
+  // Current default template – this is the existing LivePreview design
+  template: DEFAULT_TEMPLATE,
 
   setTitle: (title) => set({ title }),
   setTheme: (theme) =>
@@ -62,7 +56,7 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
       title: "Untitled Portfolio",
       theme: defaultTheme, // Uses centralized colors
       sections: [],
-      template: "modern-creative",
+      template: DEFAULT_TEMPLATE,
     }),
   load: (data) =>
     set((state) => ({

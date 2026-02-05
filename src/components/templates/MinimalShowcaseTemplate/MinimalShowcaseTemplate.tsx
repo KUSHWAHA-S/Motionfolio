@@ -4,6 +4,8 @@ import { useMemo, useState, useEffect, useRef } from "react";
 import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { gsap } from "gsap";
 import { OverlayMenu } from "../OverlayMenu";
+import { extractSections } from "@/lib/portfolioUtils";
+import { HeroSectionData } from "@/types/portfolio";
 import "./MinimalShowcaseTemplate.css";
 
 interface MinimalShowcaseTemplateProps {
@@ -32,33 +34,7 @@ export function MinimalShowcaseTemplate({
     skillsSection,
     skills,
     aboutData,
-  } = useMemo(() => {
-    const hero = sections.find((s) => s.type === "hero");
-    const projectsSec = sections.find((s) => s.type === "projects");
-    const projectsArray = Array.isArray(projectsSec?.data?.projects)
-      ? projectsSec.data.projects
-      : [];
-    const experiencesSec = sections.find((s) => s.type === "experience");
-    const experiencesArray = Array.isArray(experiencesSec?.data?.experiences)
-      ? experiencesSec.data.experiences
-      : [];
-    const skillsSec = sections.find((s) => s.type === "skills");
-    const skillsArray = Array.isArray(skillsSec?.data?.skills)
-      ? skillsSec.data.skills
-      : [];
-    const about = sections.find((s) => s.type === "about")?.data;
-
-    return {
-      heroSection: hero,
-      projectsSection: projectsSec,
-      projects: projectsArray,
-      experiencesSection: experiencesSec,
-      experiences: experiencesArray,
-      skillsSection: skillsSec,
-      skills: skillsArray,
-      aboutData: about,
-    };
-  }, [sections]);
+  } = useMemo(() => extractSections(sections), [sections]);
 
   const accent = theme.primary || "#f97316";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -67,6 +43,9 @@ export function MinimalShowcaseTemplate({
   const zigzagRef = useRef<SVGPathElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const animationRef = useRef<gsap.core.Animation | null>(null);
+
+  // Get typed hero section data
+  const heroData = heroSection?.data as HeroSectionData | undefined;
 
   // Section refs for smooth scrolling
   const heroRef = useRef<HTMLElement>(null);
@@ -223,14 +202,14 @@ export function MinimalShowcaseTemplate({
             <div className="text-xs md:text-sm font-semibold tracking-[0.18em] uppercase text-slate-400">
               Portfolio Template
             </div>
-            <a
-              href={`/portfolio/${portfolioId}`}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => {
+                window.open(`/portfolio/${portfolioId}`, '_blank', 'noopener,noreferrer');
+              }}
               className="text-[11px] font-medium text-slate-300 hover:text-slate-50 underline underline-offset-4"
             >
               Ouvrir dans un nouvel onglet
-            </a>
+            </button>
           </div>
         </header>
       )}
@@ -334,27 +313,27 @@ export function MinimalShowcaseTemplate({
               </h1>
               <p className="text-lg md:text-xl text-slate-400">
                 <span className="outlined-text">Showcasing my work as a </span>
-                {heroSection?.data?.subtitle || "Designation"}
+                {heroData?.subtitle || "Designation"}
                 <span className="outlined-text">.</span>
               </p>
             </div>
 
             {/* Two links at the bottom */}
             <div className="flex flex-wrap gap-4 justify-center pt-8">
-              {heroSection?.data?.ctaText && (
+              {heroData?.ctaText && (
                 <a
-                  href={heroSection.data.ctaLink || "#projects"}
+                  href={heroData.ctaLink || "#projects"}
                   className="inline-flex items-center rounded-full px-8 py-3 text-sm font-semibold hover:opacity-90 transition-opacity"
                   style={{ backgroundColor: accent }}
                 >
-                  {heroSection.data.ctaText}
+                  {heroData.ctaText}
                 </a>
               )}
               <a
                 href="#about"
                 className="inline-flex items-center rounded-full border border-slate-700 px-8 py-3 text-sm font-semibold hover:bg-slate-900/60 transition-colors"
               >
-                {heroSection?.data?.ctaText ? "Learn More" : "View Work"}
+                {heroData?.ctaText ? "Learn More" : "View Work"}
               </a>
             </div>
           </div>
@@ -379,7 +358,7 @@ export function MinimalShowcaseTemplate({
               </h2>
               {projects.length > 0 ? (
                 <div className="grid gap-4 md:grid-cols-2">
-                  {projects.map((project: any, idx: number) => (
+                  {projects.map((project, idx: number) => (
                     <article
                       key={idx}
                       className="rounded-2xl border border-slate-800 bg-slate-900/40 px-4 py-4 flex flex-col justify-between gap-2 hover:border-slate-500 transition-colors"
@@ -437,7 +416,7 @@ export function MinimalShowcaseTemplate({
                 Expérience
               </h2>
               <div className="space-y-4">
-                {experiences.map((exp: any, idx: number) => (
+                {experiences.map((exp, idx: number) => (
                   <article key={idx} className="space-y-1 text-xs">
                     <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
                       <div className="text-slate-100 font-medium">
@@ -528,7 +507,7 @@ export function MinimalShowcaseTemplate({
                   </h2>
                   {skills.length > 0 ? (
                     <div className="flex flex-wrap gap-2">
-                      {skills.map((skill: string, idx: number) => (
+                      {skills.map((skill, idx: number) => (
                         <span
                           key={idx}
                           className="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 text-[11px] text-slate-200 border border-slate-800"

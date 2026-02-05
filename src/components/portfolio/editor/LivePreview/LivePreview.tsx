@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ExternalLink, ArrowRight, Globe } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { extractSections } from "@/lib/portfolioUtils";
 
 // Register GSAP plugins
 if (typeof window !== "undefined") {
@@ -50,33 +51,7 @@ export function LivePreview({
     skillsSection,
     skills,
     aboutData,
-  } = useMemo(() => {
-    const hero = sections.find((s) => s.type === "hero");
-    const projectsSec = sections.find((s) => s.type === "projects");
-    const projectsArray = Array.isArray(projectsSec?.data?.projects)
-      ? projectsSec.data.projects
-      : [];
-    const experiencesSec = sections.find((s) => s.type === "experience");
-    const experiencesArray = Array.isArray(experiencesSec?.data?.experiences)
-      ? experiencesSec.data.experiences
-      : [];
-    const skillsSec = sections.find((s) => s.type === "skills");
-    const skillsArray = Array.isArray(skillsSec?.data?.skills)
-      ? skillsSec.data.skills
-      : [];
-    const about = sections.find((s) => s.type === "about")?.data;
-
-    return {
-      heroSection: hero,
-      projectsSection: projectsSec,
-      projects: projectsArray,
-      experiencesSection: experiencesSec,
-      experiences: experiencesArray,
-      skillsSection: skillsSec,
-      skills: skillsArray,
-      aboutData: about,
-    };
-  }, [sections]);
+  } = useMemo(() => extractSections(sections), [sections]);
 
   // GSAP Animations (hero only – sections use Framer Motion / static rendering)
   useEffect(() => {
@@ -135,15 +110,15 @@ export function LivePreview({
               Live preview with GSAP animations
             </p>
           </div>
-          <a
-            href={`/portfolio/${portfolioId}`}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => {
+              window.open(`/portfolio/${portfolioId}`, '_blank', 'noopener,noreferrer');
+            }}
             className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-700 hover:text-gray-900 hover:bg-white rounded-lg transition-colors"
           >
             <ExternalLink className="w-4 h-4" />
             Open in new tab
-          </a>
+          </button>
         </div>
       )}
 
@@ -296,7 +271,7 @@ export function LivePreview({
               {/* </motion.div> */}
               {projects.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {projects.map((project: any, idx: number) => (
+                  {projects.map((project, idx: number) => (
                     <div
                       key={idx}
                       className="project-card group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
@@ -374,7 +349,7 @@ export function LivePreview({
                   style={{ backgroundColor: theme.primary || "#0EA5E9" }}
                 ></div>
                 <div className="space-y-12">
-                  {experiences.map((exp: any, idx: number) => (
+                  {experiences.map((exp, idx: number) => (
                     <motion.div
                       key={idx}
                       initial={{ opacity: 0, x: -50 }}
