@@ -35,6 +35,13 @@ const templates = [
       "Dark, professional two-column layout with sidebar nav and focused content sections.",
     badge: "Pro",
   },
+  {
+    id: TEMPLATE_NAMES.CANVAS,
+    name: "Canvas",
+    description:
+      "Modern hero with rounded card layout and organic curved separator. Perfect for creative professionals.",
+    badge: "New",
+  },
 ] as const;
 
 export default function NewPortfolioPage() {

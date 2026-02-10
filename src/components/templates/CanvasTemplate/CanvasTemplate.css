@@ -1,0 +1,265 @@
+.canvas-template {
+  min-height: 100vh;
+  background-color: #f5e6a8; /* Muted yellow background */
+}
+
+.canvas-hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #f5e6a8;
+}
+
+.canvas-hero-card {
+  width: 100%;
+  max-width: 1200px;
+  height: 80vh;
+  min-height: 600px;
+  background: white;
+  border-radius: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Left Section - White Background */
+.canvas-hero-left {
+  background: white;
+  padding: 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+.canvas-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  margin-bottom: 1rem;
+}
+
+.canvas-profession {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #d97706;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.canvas-greeting {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.canvas-description {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.canvas-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.canvas-btn {
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  border: none;
+}
+
+.canvas-btn-primary {
+  background-color: #d97706;
+  color: white;
+}
+
+.canvas-btn-primary:hover {
+  background-color: #b86205;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+}
+
+.canvas-btn-secondary {
+  background-color: white;
+  color: #1a1a1a;
+  border: 1px solid #ccc;
+}
+
+.canvas-btn-secondary:hover {
+  background-color: #f5f5f5;
+  border-color: #999;
+  transform: translateY(-2px);
+}
+
+/* Right Section - Yellow Background with Image */
+.canvas-hero-right {
+  background: #fef08a; /* Bright yellow */
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Organic curved separator - creates smooth wave between sections */
+.canvas-hero-right::before {
+  content: "";
+  position: absolute;
+  left: -100px;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  background: white;
+  clip-path: path(
+    "M 0 0 C 50 15, 70 35, 80 50 C 90 65, 70 85, 0 100 L 0 0 Z"
+  );
+  z-index: 1;
+}
+
+.canvas-nav {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-end;
+  margin-bottom: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.canvas-nav-link {
+  font-size: 1rem;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  transition: color 0.3s ease;
+}
+
+.canvas-nav-link:hover {
+  color: #d97706;
+}
+
+.canvas-hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  margin-top: auto;
+}
+
+.canvas-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  clip-path: path(
+    "M 0 0 C 20 0, 40 10, 50 30 C 60 50, 70 70, 80 85 C 90 95, 95 98, 100 100 L 100 0 Z"
+  );
+  border-radius: 0 0 40px 0;
+}
+
+/* Organic shape for image - creates curved edge that blends with separator */
+.canvas-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  clip-path: ellipse(90% 95% at 50% 50%);
+  transform: scale(1.08);
+  transform-origin: center right;
+  border-radius: 0 0 40px 0;
+}
+
+.canvas-content {
+  min-height: 50vh;
+  background: white;
+  padding: 4rem 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .canvas-hero-card {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: auto;
+  }
+
+  .canvas-hero-left {
+    padding: 3rem 2rem;
+  }
+
+  .canvas-hero-right {
+    min-height: 400px;
+    padding: 2rem;
+  }
+
+  .canvas-hero-right::before {
+    display: none;
+  }
+
+  .canvas-hero-image {
+    clip-path: none;
+    border-radius: 0 0 40px 40px;
+    transform: none;
+  }
+
+  .canvas-greeting {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .canvas-hero-section {
+    padding: 1rem;
+  }
+
+  .canvas-hero-card {
+    border-radius: 24px;
+  }
+
+  .canvas-hero-left {
+    padding: 2rem 1.5rem;
+  }
+
+  .canvas-greeting {
+    font-size: 1.75rem;
+  }
+
+  .canvas-buttons {
+    flex-direction: column;
+  }
+
+  .canvas-btn {
+    width: 100%;
+  }
+
+  .canvas-nav {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-end;
+  }
+}

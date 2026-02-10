@@ -5,6 +5,7 @@ import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { ModernCreativeTemplate } from "@/components/templates/ModernCreativeTemplate";
 import { MinimalShowcaseTemplate } from "@/components/templates/MinimalShowcaseTemplate";
 import { DeveloperTwoColumnTemplate } from "@/components/templates/DeveloperTwoColumnTemplate";
+import { CanvasTemplate } from "@/components/templates/CanvasTemplate";
 import { defaultTheme } from "@/lib/colors";
 import { Portfolio } from "@/types/portfolio";
 import {
@@ -60,6 +61,13 @@ export default function PortfolioClientView({
     case TEMPLATE_NAMES.DEVELOPER_TWO_COLUMN:
       return (
         <DeveloperTwoColumnTemplate
+          portfolioId={portfolio.id || ""}
+          showHeader={false}
+        />
+      );
+    case TEMPLATE_NAMES.CANVAS:
+      return (
+        <CanvasTemplate
           portfolioId={portfolio.id || ""}
           showHeader={false}
         />

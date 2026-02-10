@@ -4,12 +4,14 @@ import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { ModernCreativeTemplate } from "@/components/templates/ModernCreativeTemplate";
 import { MinimalShowcaseTemplate } from "@/components/templates/MinimalShowcaseTemplate";
 import { DeveloperTwoColumnTemplate } from "@/components/templates/DeveloperTwoColumnTemplate";
+import { CanvasTemplate } from "@/components/templates/CanvasTemplate";
 import { JSX } from "react";
 
 type TemplateId =
   | "modern-creative"
   | "minimal-showcase"
-  | "developer-two-column";
+  | "developer-two-column"
+  | "canvas";
 
 const TEMPLATE_COMPONENTS: Record<
   TemplateId,
@@ -23,6 +25,9 @@ const TEMPLATE_COMPONENTS: Record<
   ),
   "developer-two-column": (props) => (
     <DeveloperTwoColumnTemplate portfolioId={props.portfolioId} showHeader />
+  ),
+  "canvas": (props) => (
+    <CanvasTemplate portfolioId={props.portfolioId} showHeader />
   ),
 };
 

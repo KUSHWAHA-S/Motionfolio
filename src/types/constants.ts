@@ -18,6 +18,7 @@ export const TEMPLATE_NAMES = {
   MODERN_CREATIVE: "modern-creative",
   MINIMAL_SHOWCASE: "minimal-showcase",
   DEVELOPER_TWO_COLUMN: "developer-two-column",
+  CANVAS: "canvas",
 } as const;
 
 export type TemplateName = typeof TEMPLATE_NAMES[keyof typeof TEMPLATE_NAMES];
