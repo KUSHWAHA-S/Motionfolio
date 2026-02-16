@@ -47,15 +47,15 @@ export function extractSections(sections: Section[]): ExtractedSections {
   const skillsSec = sections.find((s) => s.type === SECTION_TYPES.SKILLS);
   const about = sections.find((s) => s.type === SECTION_TYPES.ABOUT);
 
-  const projectsArray = isProjectsSectionData(projectsSec?.data)
+  const projectsArray = projectsSec && isProjectsSectionData(projectsSec.data)
     ? projectsSec.data.projects
     : [];
 
-  const experiencesArray = isExperienceSectionData(experiencesSec?.data)
+  const experiencesArray = experiencesSec && isExperienceSectionData(experiencesSec.data)
     ? experiencesSec.data.experiences
     : [];
 
-  const skillsArray = isSkillsSectionData(skillsSec?.data)
+  const skillsArray = skillsSec && isSkillsSectionData(skillsSec.data)
     ? skillsSec.data.skills
     : [];
 

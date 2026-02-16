@@ -5,15 +5,15 @@ import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, Plus, X } from "lucide-react";
+import { SkillsSectionData } from "@/types/portfolio";
 
 export function SkillsEditor() {
   const { sections, updateSection, addSection } = usePortfolioStore();
   const [newSkill, setNewSkill] = useState("");
 
   const skillsSection = sections.find((s) => s.type === "skills");
-  const skills: string[] = Array.isArray(skillsSection?.data?.skills)
-    ? skillsSection.data.skills
-    : [];
+  const skillsData = (skillsSection?.data as SkillsSectionData) || { skills: [] };
+  const skills: string[] = skillsData.skills || [];
 
   const updateSkills = (newSkills: string[]) => {
     if (skillsSection) {

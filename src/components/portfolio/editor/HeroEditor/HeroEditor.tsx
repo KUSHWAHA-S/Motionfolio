@@ -6,13 +6,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { motion } from "framer-motion";
 import { Sparkles, AlertCircle } from "lucide-react";
+import { HeroSectionData } from "@/types/portfolio";
 
 export function HeroEditor() {
   const { title, setTitle, sections, updateSection } = usePortfolioStore();
   const [imageError, setImageError] = useState<string | null>(null);
 
   const heroSection = sections.find((s) => s.type === "hero");
-  const heroData = heroSection?.data || {
+  const heroData: HeroSectionData = (heroSection?.data as HeroSectionData) || {
     subtitle: "",
     description: "",
     imageUrl: "",
@@ -110,7 +111,7 @@ export function HeroEditor() {
             Subtitle
           </label>
           <Input
-            value={heroData.subtitle}
+            value={heroData.subtitle || ""}
             onChange={(e) => updateHeroData({ subtitle: e.target.value })}
             placeholder="e.g., Building amazing digital experiences"
             className="w-full"
@@ -122,7 +123,7 @@ export function HeroEditor() {
             Description
           </label>
           <Textarea
-            value={heroData.description}
+            value={heroData.description || ""}
             onChange={(e) => updateHeroData({ description: e.target.value })}
             placeholder="A brief introduction about yourself..."
             rows={4}
@@ -135,7 +136,7 @@ export function HeroEditor() {
             Hero Image URL
           </label>
           <Input
-            value={heroData.imageUrl}
+            value={heroData.imageUrl || ""}
             onChange={(e) => handleImageUrlChange(e.target.value)}
             placeholder="Paste image URL here"
             className="w-full"
@@ -168,7 +169,7 @@ export function HeroEditor() {
               CTA Button Text
             </label>
             <Input
-              value={heroData.ctaText}
+              value={heroData.ctaText || ""}
               onChange={(e) => updateHeroData({ ctaText: e.target.value })}
               placeholder="e.g., View My Work"
               className="w-full"
@@ -179,7 +180,7 @@ export function HeroEditor() {
               CTA Link
             </label>
             <Input
-              value={heroData.ctaLink}
+              value={heroData.ctaLink || ""}
               onChange={(e) => updateHeroData({ ctaLink: e.target.value })}
               placeholder="e.g., /projects"
               className="w-full"

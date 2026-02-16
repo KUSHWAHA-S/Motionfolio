@@ -21,11 +21,14 @@ export function ContactSection({ aboutData }: ContactSectionProps) {
 
   const contactItems = [];
   
-  if ((aboutData as any).phone) {
+  // Note: phone is not currently in AboutSectionData type, but may be added in the future
+  // Using type assertion for now if needed, or remove this check if phone is not used
+  const aboutDataWithPhone = aboutData as AboutSectionData & { phone?: string };
+  if (aboutDataWithPhone.phone) {
     contactItems.push({
       icon: Phone,
       title: "Call Us On",
-      value: (aboutData as any).phone,
+      value: aboutDataWithPhone.phone,
     });
   }
   

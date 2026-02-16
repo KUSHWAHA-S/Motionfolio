@@ -6,14 +6,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { motion, AnimatePresence } from "framer-motion";
 import { Briefcase, Plus, Trash2, Calendar } from "lucide-react";
+import { ExperienceSectionData, Experience } from "@/types/portfolio";
 
 export function ExperienceEditor() {
   const { sections, updateSection, addSection } = usePortfolioStore();
 
   const experienceSection = sections.find((s) => s.type === "experience");
-  const experiences = experienceSection?.data?.experiences || [];
+  const experienceData = (experienceSection?.data as ExperienceSectionData) || { experiences: [] };
+  const experiences: (Experience & { id?: string })[] = experienceData.experiences || [];
 
-  const updateExperiences = (newExperiences: any[]) => {
+  const updateExperiences = (newExperiences: (Experience & { id?: string })[]) => {
     if (experienceSection) {
       updateSection(experienceSection.id, {
         data: { experiences: newExperiences },
@@ -42,14 +44,14 @@ export function ExperienceEditor() {
     ]);
   };
 
-  const updateExperience = (id: string, updates: any) => {
+  const updateExperience = (id: string, updates: Partial<Experience>) => {
     updateExperiences(
-      experiences.map((e: any) => (e.id === id ? { ...e, ...updates } : e))
+      experiences.map((e) => (e.id === id ? { ...e, ...updates } : e))
     );
   };
 
   const removeExperience = (id: string) => {
-    updateExperiences(experiences.filter((e: any) => e.id !== id));
+    updateExperiences(experiences.filter((e) => e.id !== id));
   };
 
   return (
@@ -108,7 +110,7 @@ export function ExperienceEditor() {
               </button>
             </motion.div>
           ) : (
-            experiences.map((exp: any, index: number) => (
+            experiences.map((exp, index: number) => (
               <motion.div
                 key={exp.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -124,7 +126,7 @@ export function ExperienceEditor() {
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    onClick={() => removeExperience(exp.id)}
+                    onClick={() => exp.id && removeExperience(exp.id)}
                     className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -138,9 +140,9 @@ export function ExperienceEditor() {
                         Job Title
                       </label>
                       <Input
-                        value={exp.title}
+                        value={exp.title || ""}
                         onChange={(e) =>
-                          updateExperience(exp.id, { title: e.target.value })
+                          updateExperience(exp.id!, { title: e.target.value })
                         }
                         placeholder="e.g., Senior Software Engineer"
                         className="w-full"
@@ -151,9 +153,9 @@ export function ExperienceEditor() {
                         Company
                       </label>
                       <Input
-                        value={exp.company}
+                        value={exp.company || ""}
                         onChange={(e) =>
-                          updateExperience(exp.id, { company: e.target.value })
+                          updateExperience(exp.id!, { company: e.target.value })
                         }
                         placeholder="e.g., Google"
                         className="w-full"
@@ -168,9 +170,9 @@ export function ExperienceEditor() {
                         Period
                       </label>
                       <Input
-                        value={exp.period}
+                        value={exp.period || ""}
                         onChange={(e) =>
-                          updateExperience(exp.id, { period: e.target.value })
+                          updateExperience(exp.id!, { period: e.target.value })
                         }
                         placeholder="e.g., Jan 2020 - Present"
                         className="w-full"
@@ -181,9 +183,9 @@ export function ExperienceEditor() {
                         Location
                       </label>
                       <Input
-                        value={exp.location}
+                        value={exp.location || ""}
                         onChange={(e) =>
-                          updateExperience(exp.id, { location: e.target.value })
+                          updateExperience(exp.id!, { location: e.target.value })
                         }
                         placeholder="e.g., San Francisco, CA"
                         className="w-full"
@@ -196,9 +198,9 @@ export function ExperienceEditor() {
                       Description
                     </label>
                     <Textarea
-                      value={exp.description}
+                      value={exp.description || ""}
                       onChange={(e) =>
-                        updateExperience(exp.id, {
+                        updateExperience(exp.id!, {
                           description: e.target.value,
                         })
                       }

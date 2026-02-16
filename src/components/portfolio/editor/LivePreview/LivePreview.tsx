@@ -7,6 +7,7 @@ import { ExternalLink, ArrowRight, Globe } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { extractSections } from "@/lib/portfolioUtils";
+import { HeroSectionData } from "@/types/portfolio";
 
 // Register GSAP plugins
 if (typeof window !== "undefined") {
@@ -131,54 +132,57 @@ export function LivePreview({
         }}
       >
         {/* Hero Section - Full Width Creative */}
-        {heroSection && (
-          <div
-            ref={heroRef}
-            className="relative min-h-[600px] flex items-center justify-center overflow-hidden"
-            style={{
-              background: heroSection.data?.imageUrl
-                ? `linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%), url(${heroSection.data.imageUrl})`
-                : `linear-gradient(135deg, ${theme.primary}15 0%, ${theme.secondary}15 100%)`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white"></div>
-            <div className="relative z-10 text-center px-6 max-w-4xl mx-auto hero-element">
-              <motion.h1
-                className="text-6xl md:text-7xl font-black mb-6 text-white drop-shadow-2xl"
-                style={{ textShadow: "0 4px 20px rgba(0,0,0,0.3)" }}
-              >
-                {title}
-              </motion.h1>
-              {heroSection.data?.subtitle && (
-                <p className="text-2xl md:text-3xl text-white/90 mb-6 font-light hero-element">
-                  {heroSection.data.subtitle}
-                </p>
-              )}
-              {heroSection.data?.description && (
-                <p className="text-lg text-white/80 max-w-2xl mx-auto mb-8 leading-relaxed hero-element">
-                  {heroSection.data.description}
-                </p>
-              )}
-              {heroSection.data?.ctaText && (
-                <motion.a
-                  href={heroSection.data.ctaLink || "#"}
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white text-lg shadow-2xl hover:scale-105 transition-transform hero-element"
-                  style={{
-                    backgroundColor: theme.primary || "#40E0D0",
-                    boxShadow: `0 10px 40px ${theme.primary}40`,
-                  }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+        {heroSection && (() => {
+          const heroData = heroSection.data as HeroSectionData;
+          return (
+            <div
+              ref={heroRef}
+              className="relative min-h-[600px] flex items-center justify-center overflow-hidden"
+              style={{
+                background: heroData?.imageUrl
+                  ? `linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%), url(${heroData.imageUrl})`
+                  : `linear-gradient(135deg, ${theme.primary}15 0%, ${theme.secondary}15 100%)`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white"></div>
+              <div className="relative z-10 text-center px-6 max-w-4xl mx-auto hero-element">
+                <motion.h1
+                  className="text-6xl md:text-7xl font-black mb-6 text-white drop-shadow-2xl"
+                  style={{ textShadow: "0 4px 20px rgba(0,0,0,0.3)" }}
                 >
-                  {heroSection.data.ctaText}
-                  <ArrowRight className="w-5 h-5" />
-                </motion.a>
-              )}
+                  {title}
+                </motion.h1>
+                {heroData?.subtitle && (
+                  <p className="text-2xl md:text-3xl text-white/90 mb-6 font-light hero-element">
+                    {heroData.subtitle}
+                  </p>
+                )}
+                {heroData?.description && (
+                  <p className="text-lg text-white/80 max-w-2xl mx-auto mb-8 leading-relaxed hero-element">
+                    {heroData.description}
+                  </p>
+                )}
+                {heroData?.ctaText && (
+                  <motion.a
+                    href={heroData.ctaLink || "#"}
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white text-lg shadow-2xl hover:scale-105 transition-transform hero-element"
+                    style={{
+                      backgroundColor: theme.primary || "#40E0D0",
+                      boxShadow: `0 10px 40px ${theme.primary}40`,
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {heroData.ctaText}
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.a>
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          );
+        })()}
 
         {/* About Section - Creative Layout */}
         {aboutData && (

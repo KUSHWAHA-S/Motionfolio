@@ -2,7 +2,7 @@
 
 import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { extractSections } from "@/lib/portfolioUtils";
-import { HeroSectionData, AboutSectionData } from "@/types/portfolio";
+import { HeroSectionData, AboutSectionData, ProjectsSectionData, Project } from "@/types/portfolio";
 import { NavigationBar } from "./sections/NavigationBar";
 import { HeroSection } from "./sections/HeroSection";
 import { AboutSection } from "./sections/AboutSection";
@@ -81,8 +81,8 @@ export function DeveloperTwoColumnTemplate({
   };
 
   // Normalize projects array for Work section
-  const projectItems: any[] =
-    ((projectsSection?.data as any)?.projects as any[]) || [];
+  const projectItems: Project[] =
+    (projectsSection?.data as ProjectsSectionData)?.projects || [];
 
   return (
     <div className="min-h-screen bg-white text-white">

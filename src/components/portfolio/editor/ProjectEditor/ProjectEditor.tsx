@@ -6,14 +6,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { motion, AnimatePresence } from "framer-motion";
 import { Folder, Plus, Trash2, ExternalLink, GripVertical } from "lucide-react";
+import { ProjectsSectionData, Project } from "@/types/portfolio";
 
 export function ProjectEditor() {
   const { sections, updateSection, addSection } = usePortfolioStore();
 
   const projectSection = sections.find((s) => s.type === "projects");
-  const projects = projectSection?.data?.projects || [];
+  const projectData = (projectSection?.data as ProjectsSectionData) || { projects: [] };
+  const projects: (Project & { id?: string; tags?: string[] })[] = projectData.projects || [];
 
-  const updateProjects = (newProjects: any[]) => {
+  const updateProjects = (newProjects: (Project & { id?: string; tags?: string[] })[]) => {
     if (projectSection) {
       updateSection(projectSection.id, {
         data: { projects: newProjects },
@@ -42,14 +44,14 @@ export function ProjectEditor() {
     ]);
   };
 
-  const updateProject = (id: string, updates: any) => {
+  const updateProject = (id: string, updates: Partial<Project>) => {
     updateProjects(
-      projects.map((p: any) => (p.id === id ? { ...p, ...updates } : p))
+      projects.map((p) => (p.id === id ? { ...p, ...updates } : p))
     );
   };
 
   const removeProject = (id: string) => {
-    updateProjects(projects.filter((p: any) => p.id !== id));
+    updateProjects(projects.filter((p) => p.id !== id));
   };
 
   return (
@@ -108,7 +110,7 @@ export function ProjectEditor() {
               </button>
             </motion.div>
           ) : (
-            projects.map((project: any, index: number) => (
+            projects.map((project, index: number) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -129,7 +131,7 @@ export function ProjectEditor() {
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    onClick={() => removeProject(project.id)}
+                    onClick={() => project.id && removeProject(project.id)}
                     className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -142,9 +144,9 @@ export function ProjectEditor() {
                       Project Title
                     </label>
                     <Input
-                      value={project.title}
+                      value={project.title || ""}
                       onChange={(e) =>
-                        updateProject(project.id, { title: e.target.value })
+                        project.id && updateProject(project.id, { title: e.target.value })
                       }
                       placeholder="e.g., E-commerce Platform"
                       className="w-full"
@@ -156,9 +158,9 @@ export function ProjectEditor() {
                       Description
                     </label>
                     <Textarea
-                      value={project.description}
+                      value={project.description || ""}
                       onChange={(e) =>
-                        updateProject(project.id, {
+                        project.id && updateProject(project.id, {
                           description: e.target.value,
                         })
                       }
@@ -174,9 +176,9 @@ export function ProjectEditor() {
                         Image URL
                       </label>
                       <Input
-                        value={project.imageUrl}
+                        value={project.imageUrl || ""}
                         onChange={(e) =>
-                          updateProject(project.id, {
+                          project.id && updateProject(project.id, {
                             imageUrl: e.target.value,
                           })
                         }
@@ -191,9 +193,9 @@ export function ProjectEditor() {
                       </label>
                       <Input
                         type="url"
-                        value={project.link}
+                        value={project.link || ""}
                         onChange={(e) =>
-                          updateProject(project.id, { link: e.target.value })
+                          project.id && updateProject(project.id, { link: e.target.value })
                         }
                         placeholder="https://project.com"
                         className="w-full"

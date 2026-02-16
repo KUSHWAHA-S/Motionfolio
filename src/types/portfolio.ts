@@ -101,18 +101,18 @@ export interface Portfolio {
 }
 
 // Type guards for section data
-export function isHeroSectionData(data: SectionData): data is HeroSectionData {
+export function isHeroSectionData(data: SectionData | undefined): data is HeroSectionData {
   return typeof data === "object" && data !== null;
 }
 
 export function isAboutSectionData(
-  data: SectionData
+  data: SectionData | undefined
 ): data is AboutSectionData {
   return typeof data === "object" && data !== null;
 }
 
 export function isProjectsSectionData(
-  data: SectionData
+  data: SectionData | undefined
 ): data is ProjectsSectionData {
   return (
     typeof data === "object" &&
@@ -123,7 +123,7 @@ export function isProjectsSectionData(
 }
 
 export function isExperienceSectionData(
-  data: SectionData
+  data: SectionData | undefined
 ): data is ExperienceSectionData {
   return (
     typeof data === "object" &&
@@ -134,7 +134,7 @@ export function isExperienceSectionData(
 }
 
 export function isSkillsSectionData(
-  data: SectionData
+  data: SectionData | undefined
 ): data is SkillsSectionData {
   return (
     typeof data === "object" &&

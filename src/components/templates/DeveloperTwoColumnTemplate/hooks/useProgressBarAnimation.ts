@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export function useProgressBarAnimation(
-  aboutSectionRef: React.RefObject<HTMLElement>,
+  aboutSectionRef: React.RefObject<HTMLElement | null>,
   skillsCount: number
 ) {
   const progressBarsRef = useRef<HTMLDivElement[]>([]);

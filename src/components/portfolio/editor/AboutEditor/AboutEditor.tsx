@@ -5,17 +5,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
 import { User, Mail, MapPin, Link as LinkIcon } from "lucide-react";
+import { AboutSectionData } from "@/types/portfolio";
 
 export function AboutEditor() {
   const { sections, updateSection, addSection } = usePortfolioStore();
 
   const aboutSection = sections.find((s) => s.type === "about");
-  const aboutData = aboutSection?.data || {
+  const aboutData: AboutSectionData = (aboutSection?.data as AboutSectionData) || {
     bio: "",
     email: "",
     location: "",
     website: "",
-    socialLinks: [],
   };
 
   const updateAboutData = (updates: any) => {
@@ -60,14 +60,14 @@ export function AboutEditor() {
             Bio
           </label>
           <Textarea
-            value={aboutData.bio}
+            value={aboutData.bio || ""}
             onChange={(e) => updateAboutData({ bio: e.target.value })}
             placeholder="Write a compelling bio about yourself, your background, and what you do..."
             rows={6}
             className="w-full"
           />
           <p className="text-xs text-gray-500 mt-1">
-            {aboutData.bio.length} characters
+            {(aboutData.bio || "").length} characters
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export function AboutEditor() {
             </label>
             <Input
               type="email"
-              value={aboutData.email}
+              value={aboutData.email || ""}
               onChange={(e) => updateAboutData({ email: e.target.value })}
               placeholder="you@example.com"
               className="w-full"
@@ -92,7 +92,7 @@ export function AboutEditor() {
               Location
             </label>
             <Input
-              value={aboutData.location}
+              value={aboutData.location || ""}
               onChange={(e) => updateAboutData({ location: e.target.value })}
               placeholder="e.g., San Francisco, CA"
               className="w-full"
@@ -107,7 +107,7 @@ export function AboutEditor() {
           </label>
           <Input
             type="url"
-            value={aboutData.website}
+            value={aboutData.website || ""}
             onChange={(e) => updateAboutData({ website: e.target.value })}
             placeholder="https://yourwebsite.com"
             className="w-full"
