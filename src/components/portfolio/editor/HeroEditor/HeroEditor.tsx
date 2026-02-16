@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,6 +10,7 @@ import { Sparkles, AlertCircle } from "lucide-react";
 import { HeroSectionData } from "@/types/portfolio";
 
 export function HeroEditor() {
+  const { t } = useTranslation();
   const { title, setTitle, sections, updateSection } = usePortfolioStore();
   const [imageError, setImageError] = useState<string | null>(null);
 
@@ -51,7 +53,7 @@ export function HeroEditor() {
       const img = new Image();
       img.onload = () => setImageError(null);
       img.onerror = () =>
-        setImageError("Failed to load image. Please check the URL.");
+        setImageError(t("hero.imageLoadError"));
       img.src = directUrl;
     }
   };
@@ -81,10 +83,10 @@ export function HeroEditor() {
         </div>
         <div>
           <h2 className="text-xl font-semibold" style={{ color: "#1A1A1A" }}>
-            Hero Section
+            {t("hero.title")}
           </h2>
           <p className="text-sm text-gray-500">
-            Your portfolio's first impression
+            {t("hero.subtitle")}
           </p>
         </div>
       </div>
@@ -96,36 +98,36 @@ export function HeroEditor() {
       >
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Portfolio Title
+            {t("hero.portfolioTitle")}
           </label>
           <Input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="e.g., John Doe - Full Stack Developer"
+            placeholder={t("hero.portfolioTitlePlaceholder")}
             className="w-full"
           />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Subtitle
+            {t("hero.subtitleLabel")}
           </label>
           <Input
             value={heroData.subtitle || ""}
             onChange={(e) => updateHeroData({ subtitle: e.target.value })}
-            placeholder="e.g., Building amazing digital experiences"
+            placeholder={t("hero.subtitlePlaceholder")}
             className="w-full"
           />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Description
+            {t("hero.description")}
           </label>
           <Textarea
             value={heroData.description || ""}
             onChange={(e) => updateHeroData({ description: e.target.value })}
-            placeholder="A brief introduction about yourself..."
+            placeholder={t("hero.descriptionPlaceholder")}
             rows={4}
             className="w-full"
           />
@@ -133,12 +135,12 @@ export function HeroEditor() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Hero Image URL
+            {t("hero.heroImageUrl")}
           </label>
           <Input
             value={heroData.imageUrl || ""}
             onChange={(e) => handleImageUrlChange(e.target.value)}
-            placeholder="Paste image URL here"
+            placeholder={t("hero.heroImagePlaceholder")}
             className="w-full"
           />
           {imageError && (
@@ -155,7 +157,7 @@ export function HeroEditor() {
                 className="w-full h-48 object-cover"
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = "none";
-                  setImageError("Image failed to load. Please check the URL.");
+                  setImageError(t("hero.imageFailedToLoad"));
                 }}
                 onLoad={() => setImageError(null)}
               />
@@ -166,23 +168,23 @@ export function HeroEditor() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              CTA Button Text
+              {t("hero.ctaButtonText")}
             </label>
             <Input
               value={heroData.ctaText || ""}
               onChange={(e) => updateHeroData({ ctaText: e.target.value })}
-              placeholder="e.g., View My Work"
+              placeholder={t("hero.ctaButtonPlaceholder")}
               className="w-full"
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              CTA Link
+              {t("hero.ctaLink")}
             </label>
             <Input
               value={heroData.ctaLink || ""}
               onChange={(e) => updateHeroData({ ctaLink: e.target.value })}
-              placeholder="e.g., /projects"
+              placeholder={t("hero.ctaLinkPlaceholder")}
               className="w-full"
             />
           </div>

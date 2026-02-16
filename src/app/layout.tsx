@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import { ReactNode } from "react";
 import ConditionalNavBar from "@/components/layout/ConditionalNavBar";
 import AuthProvider from "@/components/AuthProvider";
+import I18nProvider from "@/components/I18nProvider";
 import PageTransition from "@/components/layout/PageTransition";
 
 export const metadata = { title: "Motionfolio" };
@@ -22,17 +23,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body>
-        <AuthProvider>
-          <div
-            className="min-h-screen flex flex-col"
-            style={{ backgroundColor: "#F9FAFB", color: "#1A1A1A" }}
-          >
-            <ConditionalNavBar />
-            <main className="flex-1">
-              <PageTransition>{children}</PageTransition>
-            </main>
-          </div>
-        </AuthProvider>
+        <I18nProvider>
+          <AuthProvider>
+            <div
+              className="min-h-screen flex flex-col"
+              style={{ backgroundColor: "#F9FAFB", color: "#1A1A1A" }}
+            >
+              <ConditionalNavBar />
+              <main className="flex-1">
+                <PageTransition>{children}</PageTransition>
+              </main>
+            </div>
+          </AuthProvider>
+        </I18nProvider>
       </body>
     </html>
   );

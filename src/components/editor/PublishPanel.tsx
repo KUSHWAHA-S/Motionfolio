@@ -1,10 +1,12 @@
 // src/components/editor/PublishPanel.tsx
 "use client";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { Button } from "@/components/ui/button";
 
 export default function PublishPanel({ portfolioId }: { portfolioId: string }) {
+  const { t } = useTranslation();
   const [slug, setSlug] = useState("");
   const [isPublic, setIsPublic] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -32,11 +34,11 @@ export default function PublishPanel({ portfolioId }: { portfolioId: string }) {
         body: JSON.stringify({ id: portfolioId, publish: isPublic }),
       });
       const json = await res.json();
-      if (!res.ok) throw new Error(json?.error || "Publish failed");
-      alert("Visibility updated ✅");
+      if (!res.ok) throw new Error(json?.error || t("publish.publishFailed", { error: "" }));
+      alert(t("publish.visibilityUpdated"));
     } catch (err: any) {
       console.error(err);
-      alert("Publish failed: " + (err.message || err));
+      alert(t("publish.publishFailed", { error: err.message || err }));
     } finally {
       setLoading(false);
     }
@@ -44,14 +46,14 @@ export default function PublishPanel({ portfolioId }: { portfolioId: string }) {
 
   return (
     <div className='bg-white p-4 rounded shadow'>
-      <label className='block text-sm text-slate-700'>Public URL slug</label>
+      <label className='block text-sm text-slate-700'>{t("publish.publicUrlSlug")}</label>
       <div className='mt-2 flex gap-2 items-center'>
         <div className='text-sm text-slate-500'>/</div>
         <input
           className='border px-3 py-1 rounded flex-1'
           value={slug}
           onChange={(e) => setSlug(e.target.value)}
-          placeholder='your-username-or-slug'
+          placeholder={t("publish.slugPlaceholder")}
         />
       </div>
 
@@ -63,20 +65,20 @@ export default function PublishPanel({ portfolioId }: { portfolioId: string }) {
           onChange={(e) => setIsPublic(e.target.checked)}
         />
         <label htmlFor='isPublic' className='text-sm text-slate-700'>
-          Make portfolio public
+          {t("publish.makePublic")}
         </label>
       </div>
 
       <div className='mt-4'>
         <Button onClick={handlePublish} disabled={loading} className='mr-2'>
-          {loading ? "Publishing..." : "Publish"}
+          {loading ? t("publish.publishing") : t("publish.publish")}
         </Button>
         <Button
           variant='ghost'
           size='sm'
-          onClick={() => alert("Preview not implemented yet")}
+          onClick={() => alert(t("publish.previewNotImplemented"))}
         >
-          Preview
+          {t("publish.preview")}
         </Button>
       </div>
     </div>

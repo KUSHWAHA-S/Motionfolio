@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "dashboard": "仪表板",
+    "editPortfolio": "编辑作品集",
+    "edit": "编辑",
+    "signOut": "登出",
+    "logIn": "登录"
+  },
+  "experience": {
+    "title": "经验",
+    "subtitle": "您的职业历程",
+    "addExperience": "添加经验",
+    "noExperience": "还没有经验条目",
+    "addFirstExperience": "添加您的第一条经验",
+    "experienceNumber": "经验 {{number}}",
+    "jobTitle": "职位",
+    "jobTitlePlaceholder": "例如：高级软件工程师",
+    "company": "公司",
+    "companyPlaceholder": "例如：Google",
+    "period": "期间",
+    "periodPlaceholder": "例如：2020年1月 - 至今",
+    "location": "地点",
+    "locationPlaceholder": "例如：旧金山，CA",
+    "description": "描述",
+    "descriptionPlaceholder": "描述您的职责和成就..."
+  },
+  "about": {
+    "title": "关于部分",
+    "subtitle": "讲述您的故事",
+    "bio": "简介",
+    "bioPlaceholder": "写一份关于您自己、您的背景以及您所做的事情的有说服力的简介...",
+    "characters": "{{count}} 个字符"
+  },
+  "hero": {
+    "title": "英雄部分",
+    "subtitle": "您作品集的第一印象",
+    "portfolioTitle": "作品集标题",
+    "portfolioTitlePlaceholder": "例如：张三 - 全栈开发人员",
+    "subtitleLabel": "副标题",
+    "subtitlePlaceholder": "例如：构建令人惊叹的数字体验",
+    "description": "描述",
+    "descriptionPlaceholder": "关于您自己的简短介绍..."
+  },
+  "home": {
+    "createStunningPortfolios": "创建令人惊叹的作品集",
+    "buildYourPortfolio": "构建您的作品集",
+    "inMinutesNotHours": "几分钟，而不是几小时",
+    "tagline": "面向设计师、开发人员和创意人员的现代作品集构建器。无需编码。只需创造力。",
+    "getStarted": "开始",
+    "viewDemo": "查看演示",
+    "multipleTemplates": "多个模板",
+    "multipleTemplatesDesc": "从精美、专业设计的模板中选择，完美展示您的作品。",
+    "customThemes": "自定义主题",
+    "customThemesDesc": "使用与您的品牌匹配的自定义颜色和主题个性化您的作品集。",
+    "realtimeEditing": "实时编辑",
+    "realtimeEditingDesc": "通过我们的实时预览编辑器即时查看您的更改。无需编码。",
+    "publishInstantly": "即时发布",
+    "publishInstantlyDesc": "使用自定义URL分享您的作品集。几秒钟内上线，而不是几小时。",
+    "gsapAnimations": "GSAP动画",
+    "gsapAnimationsDesc": "由GSAP驱动的令人惊叹的动画，让您的作品集脱颖而出。",
+    "professionalShowcase": "专业展示",
+    "professionalShowcaseDesc": "以专业格式展示您的项目、技能和经验。"
+  },
+  "common": {
+    "loading": "加载中...",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "add": "添加",
+    "remove": "移除"
+  }
+}

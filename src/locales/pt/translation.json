@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "dashboard": "Painel",
+    "editPortfolio": "Editar Portfólio",
+    "edit": "Editar",
+    "signOut": "Sair",
+    "logIn": "Entrar"
+  },
+  "experience": {
+    "title": "Experiência",
+    "subtitle": "Sua jornada profissional",
+    "addExperience": "Adicionar Experiência",
+    "noExperience": "Ainda não há entradas de experiência",
+    "addFirstExperience": "Adicione sua primeira experiência",
+    "experienceNumber": "Experiência {{number}}",
+    "jobTitle": "Cargo",
+    "jobTitlePlaceholder": "ex., Engenheiro de Software Sênior",
+    "company": "Empresa",
+    "companyPlaceholder": "ex., Google",
+    "period": "Período",
+    "periodPlaceholder": "ex., Jan 2020 - Presente",
+    "location": "Localização",
+    "locationPlaceholder": "ex., San Francisco, CA",
+    "description": "Descrição",
+    "descriptionPlaceholder": "Descreva suas responsabilidades e conquistas..."
+  },
+  "about": {
+    "title": "Seção Sobre",
+    "subtitle": "Conte sua história",
+    "bio": "Biografia",
+    "bioPlaceholder": "Escreva uma biografia convincente sobre você, seu histórico e o que você faz...",
+    "characters": "{{count}} caracteres"
+  },
+  "hero": {
+    "title": "Seção Hero",
+    "subtitle": "A primeira impressão do seu portfólio",
+    "portfolioTitle": "Título do Portfólio",
+    "portfolioTitlePlaceholder": "ex., João Silva - Desenvolvedor Full Stack",
+    "subtitleLabel": "Subtítulo",
+    "subtitlePlaceholder": "ex., Criando experiências digitais incríveis",
+    "description": "Descrição",
+    "descriptionPlaceholder": "Uma breve introdução sobre você..."
+  },
+  "home": {
+    "createStunningPortfolios": "Crie Portfólios Impressionantes",
+    "buildYourPortfolio": "Construa Seu Portfólio",
+    "inMinutesNotHours": "Em Minutos, Não Horas",
+    "tagline": "O construtor de portfólio moderno para designers, desenvolvedores e criativos. Nenhuma codificação necessária. Apenas criatividade.",
+    "getStarted": "Começar",
+    "viewDemo": "Ver Demo",
+    "multipleTemplates": "Múltiplos Modelos",
+    "multipleTemplatesDesc": "Escolha entre modelos lindos e profissionalmente projetados que mostram seu trabalho perfeitamente.",
+    "customThemes": "Temas Personalizados",
+    "customThemesDesc": "Personalize seu portfólio com cores e temas personalizados que correspondem à sua marca.",
+    "realtimeEditing": "Edição em Tempo Real",
+    "realtimeEditingDesc": "Veja suas alterações instantaneamente com nosso editor de visualização ao vivo. Nenhuma codificação necessária.",
+    "publishInstantly": "Publicar Instantaneamente",
+    "publishInstantlyDesc": "Compartilhe seu portfólio com uma URL personalizada. Fique online em segundos, não horas.",
+    "gsapAnimations": "Animações GSAP",
+    "gsapAnimationsDesc": "Animações impressionantes alimentadas por GSAP que fazem seu portfólio se destacar.",
+    "professionalShowcase": "Apresentação Profissional",
+    "professionalShowcaseDesc": "Mostre seus projetos, habilidades e experiência em um formato profissional."
+  },
+  "common": {
+    "loading": "Carregando...",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "add": "Adicionar",
+    "remove": "Remover"
+  }
+}

@@ -1,0 +1,73 @@
+{
+    "nav": {
+        "dashboard": "Panel de control",
+        "editPortfolio": "Editar Portafolio",
+        "edit": "Editar",
+        "signOut": "Cerrar sesión",
+        "logIn": "Iniciar sesión"
+    },
+    "experience": {
+        "title": "Experiencia",
+        "subtitle": "Tu trayectoria profesional",
+        "addExperience": "Agregar Experiencia",
+        "noExperience": "Aún no hay entradas de experiencia",
+        "addFirstExperience": "Agrega tu primera experiencia",
+        "experienceNumber": "Experiencia {{number}}",
+        "jobTitle": "Título del Trabajo",
+        "jobTitlePlaceholder": "ej., Ingeniero de Software Senior",
+        "company": "Empresa",
+        "companyPlaceholder": "ej., Google",
+        "period": "Período",
+        "periodPlaceholder": "ej., Ene 2020 - Presente",
+        "location": "Ubicación",
+        "locationPlaceholder": "ej., San Francisco, CA",
+        "description": "Descripción",
+        "descriptionPlaceholder": "Describe tus responsabilidades y logros..."
+    },
+    "about": {
+        "title": "Sección Acerca de",
+        "subtitle": "Cuenta tu historia",
+        "bio": "Biografía",
+        "bioPlaceholder": "Escribe una biografía convincente sobre ti, tu experiencia y lo que haces...",
+        "characters": "{{count}} caracteres"
+    },
+    "hero": {
+        "title": "Sección Hero",
+        "subtitle": "La primera impresión de tu portafolio",
+        "portfolioTitle": "Título del Portafolio",
+        "portfolioTitlePlaceholder": "ej., Juan Pérez - Desarrollador Full Stack",
+        "subtitleLabel": "Subtítulo",
+        "subtitlePlaceholder": "ej., Construyendo experiencias digitales increíbles",
+        "description": "Descripción",
+        "descriptionPlaceholder": "Una breve introducción sobre ti..."
+    },
+    "home": {
+        "createStunningPortfolios": "Crea Portafolios Impresionantes",
+        "buildYourPortfolio": "Construye Tu Portafolio",
+        "inMinutesNotHours": "En Minutos, No Horas",
+        "tagline": "El constructor de portafolios moderno para diseñadores, desarrolladores y creativos. No se requiere codificación. Solo creatividad.",
+        "getStarted": "Comenzar",
+        "viewDemo": "Ver Demo",
+        "multipleTemplates": "Múltiples Plantillas",
+        "multipleTemplatesDesc": "Elige entre hermosas plantillas diseñadas profesionalmente que muestran tu trabajo perfectamente.",
+        "customThemes": "Temas Personalizados",
+        "customThemesDesc": "Personaliza tu portafolio con colores y temas personalizados que coincidan con tu marca.",
+        "realtimeEditing": "Edición en Tiempo Real",
+        "realtimeEditingDesc": "Ve tus cambios al instante con nuestro editor de vista previa en vivo. No se requiere codificación.",
+        "publishInstantly": "Publicar Instantáneamente",
+        "publishInstantlyDesc": "Comparte tu portafolio con una URL personalizada. Publica en segundos, no horas.",
+        "gsapAnimations": "Animaciones GSAP",
+        "gsapAnimationsDesc": "Animaciones impresionantes impulsadas por GSAP que hacen que tu portafolio se destaque.",
+        "professionalShowcase": "Exhibición Profesional",
+        "professionalShowcaseDesc": "Muestra tus proyectos, habilidades y experiencia en un formato profesional."
+    },
+    "common": {
+        "loading": "Cargando...",
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "delete": "Eliminar",
+        "edit": "Editar",
+        "add": "Agregar",
+        "remove": "Eliminar"
+    }
+}

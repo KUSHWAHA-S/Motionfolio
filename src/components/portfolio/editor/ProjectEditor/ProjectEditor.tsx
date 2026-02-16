@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,6 +10,7 @@ import { Folder, Plus, Trash2, ExternalLink, GripVertical } from "lucide-react";
 import { ProjectsSectionData, Project } from "@/types/portfolio";
 
 export function ProjectEditor() {
+  const { t } = useTranslation();
   const { sections, updateSection, addSection } = usePortfolioStore();
 
   const projectSection = sections.find((s) => s.type === "projects");
@@ -66,10 +68,10 @@ export function ProjectEditor() {
           </div>
           <div>
             <h2 className="text-xl font-semibold" style={{ color: "#1A1A1A" }}>
-              Projects
+              {t("projects.title")}
             </h2>
             <p className="text-sm" style={{ color: "#6B7280" }}>
-              Showcase your best work
+              {t("projects.subtitle")}
             </p>
           </div>
         </div>
@@ -87,7 +89,7 @@ export function ProjectEditor() {
           }}
         >
           <Plus className="w-4 h-4" />
-          Add Project
+          {t("projects.addProject")}
         </motion.button>
       </div>
 
@@ -101,12 +103,12 @@ export function ProjectEditor() {
               className="text-center py-12 border-2 border-dashed border-gray-300 rounded-lg"
             >
               <Folder className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-              <p className="text-gray-500 mb-4">No projects yet</p>
+              <p className="text-gray-500 mb-4">{t("projects.noProjects")}</p>
               <button
                 onClick={addProject}
                 className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors"
               >
-                Add your first project
+                {t("projects.addFirstProject")}
               </button>
             </motion.div>
           ) : (
@@ -125,7 +127,7 @@ export function ProjectEditor() {
                       <GripVertical className="w-5 h-5" />
                     </div>
                     <h3 className="font-semibold text-gray-900">
-                      Project {index + 1}
+                      {t("projects.projectNumber", { number: index + 1 })}
                     </h3>
                   </div>
                   <motion.button
@@ -141,21 +143,21 @@ export function ProjectEditor() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Project Title
+                      {t("projects.projectTitle")}
                     </label>
                     <Input
                       value={project.title || ""}
                       onChange={(e) =>
                         project.id && updateProject(project.id, { title: e.target.value })
                       }
-                      placeholder="e.g., E-commerce Platform"
+                      placeholder={t("projects.projectTitlePlaceholder")}
                       className="w-full"
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Description
+                      {t("projects.description")}
                     </label>
                     <Textarea
                       value={project.description || ""}
@@ -164,7 +166,7 @@ export function ProjectEditor() {
                           description: e.target.value,
                         })
                       }
-                      placeholder="Describe your project, technologies used, and key features..."
+                      placeholder={t("projects.descriptionPlaceholder")}
                       rows={4}
                       className="w-full"
                     />
@@ -173,7 +175,7 @@ export function ProjectEditor() {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Image URL
+                        {t("projects.imageUrl")}
                       </label>
                       <Input
                         value={project.imageUrl || ""}
@@ -182,14 +184,14 @@ export function ProjectEditor() {
                             imageUrl: e.target.value,
                           })
                         }
-                        placeholder="https://example.com/image.jpg"
+                        placeholder={t("projects.imageUrlPlaceholder")}
                         className="w-full"
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
                         <ExternalLink className="w-4 h-4" />
-                        Project Link
+                        {t("projects.projectLink")}
                       </label>
                       <Input
                         type="url"
@@ -197,7 +199,7 @@ export function ProjectEditor() {
                         onChange={(e) =>
                           project.id && updateProject(project.id, { link: e.target.value })
                         }
-                        placeholder="https://project.com"
+                        placeholder={t("projects.projectLinkPlaceholder")}
                         className="w-full"
                       />
                     </div>
@@ -207,7 +209,7 @@ export function ProjectEditor() {
                     <div className="rounded-lg overflow-hidden border border-gray-200">
                       <img
                         src={project.imageUrl}
-                        alt={project.title || "Project preview"}
+                        alt={project.title || t("projects.projectPreview")}
                         className="w-full h-48 object-cover"
                         onError={(e) => {
                           (e.target as HTMLImageElement).style.display = "none";

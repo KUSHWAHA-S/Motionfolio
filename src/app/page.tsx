@@ -1,4 +1,5 @@
 "use client";
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -16,66 +17,61 @@ import {
 } from "lucide-react";
 
 export default function Home() {
+  const { t } = useTranslation();
+  
   const features = [
     {
       icon: <LayoutTemplate className="w-6 h-6" />,
-      title: "Multiple Templates",
-      description:
-        "Choose from beautiful, professionally designed templates that showcase your work perfectly.",
+      title: t("home.multipleTemplates"),
+      description: t("home.multipleTemplatesDesc"),
     },
     {
       icon: <Palette className="w-6 h-6" />,
-      title: "Custom Themes",
-      description:
-        "Personalize your portfolio with custom colors and themes that match your brand.",
+      title: t("home.customThemes"),
+      description: t("home.customThemesDesc"),
     },
     {
       icon: <Zap className="w-6 h-6" />,
-      title: "Real-time Editing",
-      description:
-        "See your changes instantly with our live preview editor. No coding required.",
+      title: t("home.realtimeEditing"),
+      description: t("home.realtimeEditingDesc"),
     },
     {
       icon: <Globe className="w-6 h-6" />,
-      title: "Publish Instantly",
-      description:
-        "Share your portfolio with a custom URL. Go live in seconds, not hours.",
+      title: t("home.publishInstantly"),
+      description: t("home.publishInstantlyDesc"),
     },
     {
       icon: <Code className="w-6 h-6" />,
-      title: "GSAP Animations",
-      description:
-        "Stunning animations powered by GSAP that make your portfolio stand out.",
+      title: t("home.gsapAnimations"),
+      description: t("home.gsapAnimationsDesc"),
     },
     {
       icon: <Users className="w-6 h-6" />,
-      title: "Professional Showcase",
-      description:
-        "Showcase your projects, skills, and experience in a professional format.",
+      title: t("home.professionalShowcase"),
+      description: t("home.professionalShowcaseDesc"),
     },
   ];
 
   const steps = [
     {
       number: "01",
-      title: "Sign Up",
-      description: "Create your account in seconds with just your email.",
+      title: t("home.step1Title"),
+      description: t("home.step1Desc"),
     },
     {
       number: "02",
-      title: "Choose Template",
-      description:
-        "Select from our collection of beautiful portfolio templates.",
+      title: t("home.step2Title"),
+      description: t("home.step2Desc"),
     },
     {
       number: "03",
-      title: "Customize & Add Content",
-      description: "Add your projects, skills, and customize your theme.",
+      title: t("home.step3Title"),
+      description: t("home.step3Desc"),
     },
     {
       number: "04",
-      title: "Publish & Share",
-      description: "Publish your portfolio and share it with the world.",
+      title: t("home.step4Title"),
+      description: t("home.step4Desc"),
     },
   ];
 
@@ -108,7 +104,7 @@ export default function Home() {
             >
               <Sparkles className="w-4 h-4" />
               <span className="text-sm font-semibold">
-                Create Stunning Portfolios
+                {t("home.createStunningPortfolios")}
               </span>
             </motion.div>
             <h1
@@ -119,16 +115,15 @@ export default function Home() {
                 letterSpacing: "-0.03em",
               }}
             >
-              Build Your Portfolio
+              {t("home.buildYourPortfolio")}
               <br />
-              <span style={{ color: "#40E0D0" }}>In Minutes, Not Hours</span>
+              <span style={{ color: "#40E0D0" }}>{t("home.inMinutesNotHours")}</span>
             </h1>
             <p
               className="text-xl md:text-2xl mb-10 max-w-2xl mx-auto"
               style={{ color: "#64748B" }}
             >
-              The modern portfolio builder for designers, developers, and
-              creatives. No coding required. Just creativity.
+              {t("home.tagline")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/auth/signin">
@@ -152,7 +147,7 @@ export default function Home() {
                       "0 4px 6px rgba(0, 0, 0, 0.1)";
                   }}
                 >
-                  Get Started Free
+                  {t("home.getStartedFree")}
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
@@ -162,7 +157,7 @@ export default function Home() {
                   size="lg"
                   className="px-8 py-4 text-lg font-semibold rounded-xl"
                 >
-                  Sign In
+                  {t("home.signIn")}
                 </Button>
               </Link>
             </div>
@@ -188,12 +183,12 @@ export default function Home() {
                 letterSpacing: "-0.02em",
               }}
             >
-              Everything You Need to
+              {t("home.everythingYouNeed")}
               <br />
-              <span style={{ color: "#40E0D0" }}>Showcase Your Work</span>
+              <span style={{ color: "#40E0D0" }}>{t("home.showcaseYourWork")}</span>
             </h2>
             <p className="text-lg" style={{ color: "#64748B" }}>
-              Powerful features designed to make portfolio creation effortless
+              {t("home.powerfulFeatures")}
             </p>
           </motion.div>
 
@@ -264,11 +259,11 @@ export default function Home() {
                 letterSpacing: "-0.02em",
               }}
             >
-              Get Started in
-              <span style={{ color: "#40E0D0" }}> 4 Simple Steps</span>
+              {t("home.getStartedIn")}
+              <span style={{ color: "#40E0D0" }}> {t("home.fourSimpleSteps")}</span>
             </h2>
             <p className="text-lg" style={{ color: "#64748B" }}>
-              From signup to published portfolio in minutes
+              {t("home.fromSignupToPublished")}
             </p>
           </motion.div>
 
@@ -337,33 +332,30 @@ export default function Home() {
                 letterSpacing: "-0.02em",
               }}
             >
-              Beautiful Templates
+              {t("home.beautifulTemplates")}
               <br />
-              <span style={{ color: "#40E0D0" }}>For Every Creative</span>
+              <span style={{ color: "#40E0D0" }}>{t("home.forEveryCreative")}</span>
             </h2>
             <p className="text-lg" style={{ color: "#64748B" }}>
-              Choose from our collection of professionally designed templates
+              {t("home.chooseFromCollection")}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                name: "Modern Creative",
-                description:
-                  "Bold hero sections with animated cards. Perfect for designers & developers.",
+                name: t("home.template1Name"),
+                description: t("home.template1Desc"),
                 gradient: "linear-gradient(135deg, #40E0D0 0%, #20B2AA 100%)",
               },
               {
-                name: "Minimal Showcase",
-                description:
-                  "Clean, typography-focused layout. Great for simple portfolios.",
+                name: t("home.template2Name"),
+                description: t("home.template2Desc"),
                 gradient: "linear-gradient(135deg, #48D1CC 0%, #40E0D0 100%)",
               },
               {
-                name: "Developer Two-Column",
-                description:
-                  "Dark, professional layout with sidebar navigation and focused content.",
+                name: t("home.template3Name"),
+                description: t("home.template3Desc"),
                 gradient: "linear-gradient(135deg, #20B2AA 0%, #008B8B 100%)",
               },
             ].map((template, index) => (
@@ -451,11 +443,10 @@ export default function Home() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                Ready to Build Your Portfolio?
+                {t("home.readyToBuild")}
               </h2>
               <p className="text-xl mb-8 text-white opacity-90">
-                Join thousands of creatives showcasing their work with
-                Motionfolio
+                {t("home.joinThousands")}
               </p>
               <Link href="/auth/signin">
                 <Button
@@ -476,7 +467,7 @@ export default function Home() {
                       "0 4px 6px rgba(0, 0, 0, 0.1)";
                   }}
                 >
-                  Start Building Now
+                  {t("home.startBuildingNow")}
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>

@@ -1,6 +1,7 @@
 // src/app/dashboard/page.tsx
 "use client";
 
+import { useTranslation } from "react-i18next";
 import useSWR from "swr";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,6 +13,7 @@ const fetcher = (url: string) =>
   fetch(url, { credentials: "include" }).then((res) => res.json());
 
 export default function DashboardPage() {
+  const { t } = useTranslation();
   const router = useRouter();
   const {
     data: portfolios,
@@ -22,7 +24,7 @@ export default function DashboardPage() {
 
   const handleDelete = async (e: React.MouseEvent, id: string) => {
     e.stopPropagation(); // Prevent card click
-    if (!confirm("Are you sure you want to delete this portfolio?")) return;
+    if (!confirm(t("dashboard.deleteConfirm"))) return;
     setDeletingId(id);
     const res = await fetch(`/api/portfolios/${id}`, {
       method: "DELETE",
@@ -31,7 +33,7 @@ export default function DashboardPage() {
     if (res.ok) {
       mutate();
     } else {
-      alert("Failed to delete portfolio.");
+      alert(t("dashboard.deleteFailed"));
     }
     setDeletingId(null);
   };
@@ -40,8 +42,8 @@ export default function DashboardPage() {
     window.open(`/portfolio/${id}`, '_blank', 'noopener,noreferrer');
   };
 
-  if (error) return <p className="p-6">Failed to load portfolios.</p>;
-  if (!portfolios) return <p className="p-6">Loading...</p>;
+  if (error) return <p className="p-6">{t("dashboard.failedToLoad")}</p>;
+  if (!portfolios) return <p className="p-6">{t("dashboard.loading")}</p>;
 
   return (
     <ProtectedRoute>
@@ -54,7 +56,7 @@ export default function DashboardPage() {
               color: "#0F172A",
             }}
           >
-            Your Collection
+            {t("dashboard.yourCollection")}
           </h1>
           <Link
             href="/portfolio/new"
@@ -67,12 +69,12 @@ export default function DashboardPage() {
               e.currentTarget.style.backgroundColor = "#40E0D0";
             }}
           >
-            + Create New
+            {t("dashboard.createNew")}
           </Link>
         </div>
 
         {portfolios.length === 0 ? (
-          <p>No portfolios yet. Click “Create New” to start.</p>
+          <p>{t("dashboard.noPortfolios")}</p>
         ) : (
           <div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -127,7 +129,7 @@ export default function DashboardPage() {
                   {p.title}
                 </h2>
                 <p className="text-sm mb-4" style={{ color: "#64748B" }}>
-                  Last updated: {new Date(p.updated_at).toLocaleString()}
+                  {t("dashboard.lastUpdated", { date: new Date(p.updated_at).toLocaleString() })}
                 </p>
                 <div
                   className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10"
@@ -160,7 +162,7 @@ export default function DashboardPage() {
                       e.currentTarget.style.transform = "scale(1) rotate(0deg)";
                       e.currentTarget.style.boxShadow = "none";
                     }}
-                    title="Edit portfolio"
+                    title={t("dashboard.editPortfolio")}
                   >
                     <Edit className="w-4 h-4" />
                   </button>
@@ -198,7 +200,7 @@ export default function DashboardPage() {
                         e.currentTarget.style.boxShadow = "none";
                       }
                     }}
-                    title="Delete portfolio"
+                    title={t("dashboard.deletePortfolio")}
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -215,7 +217,7 @@ export default function DashboardPage() {
                       className="w-2 h-2 rounded-full"
                       style={{ backgroundColor: "#40E0D0" }}
                     />
-                    <span>Click to view</span>
+                    <span>{t("dashboard.clickToView")}</span>
                   </div>
                 </div>
               </div>

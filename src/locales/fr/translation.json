@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "editPortfolio": "Modifier le Portfolio",
+    "edit": "Modifier",
+    "signOut": "Se déconnecter",
+    "logIn": "Se connecter"
+  },
+  "experience": {
+    "title": "Expérience",
+    "subtitle": "Votre parcours professionnel",
+    "addExperience": "Ajouter une Expérience",
+    "noExperience": "Aucune entrée d'expérience pour le moment",
+    "addFirstExperience": "Ajoutez votre première expérience",
+    "experienceNumber": "Expérience {{number}}",
+    "jobTitle": "Titre du Poste",
+    "jobTitlePlaceholder": "ex., Ingénieur Logiciel Senior",
+    "company": "Entreprise",
+    "companyPlaceholder": "ex., Google",
+    "period": "Période",
+    "periodPlaceholder": "ex., Jan 2020 - Présent",
+    "location": "Localisation",
+    "locationPlaceholder": "ex., San Francisco, CA",
+    "description": "Description",
+    "descriptionPlaceholder": "Décrivez vos responsabilités et réalisations..."
+  },
+  "about": {
+    "title": "Section À Propos",
+    "subtitle": "Racontez votre histoire",
+    "bio": "Biographie",
+    "bioPlaceholder": "Rédigez une biographie convaincante sur vous, votre parcours et ce que vous faites...",
+    "characters": "{{count}} caractères"
+  },
+  "hero": {
+    "title": "Section Hero",
+    "subtitle": "La première impression de votre portfolio",
+    "portfolioTitle": "Titre du Portfolio",
+    "portfolioTitlePlaceholder": "ex., Jean Dupont - Développeur Full Stack",
+    "subtitleLabel": "Sous-titre",
+    "subtitlePlaceholder": "ex., Créer des expériences numériques incroyables",
+    "description": "Description",
+    "descriptionPlaceholder": "Une brève introduction sur vous..."
+  },
+  "home": {
+    "createStunningPortfolios": "Créez des Portfolios Époustouflants",
+    "buildYourPortfolio": "Construisez Votre Portfolio",
+    "inMinutesNotHours": "En Minutes, Pas en Heures",
+    "tagline": "Le constructeur de portfolio moderne pour les designers, développeurs et créatifs. Aucun codage requis. Juste de la créativité.",
+    "getStarted": "Commencer",
+    "viewDemo": "Voir la Démo",
+    "multipleTemplates": "Modèles Multiples",
+    "multipleTemplatesDesc": "Choisissez parmi de beaux modèles conçus professionnellement qui présentent parfaitement votre travail.",
+    "customThemes": "Thèmes Personnalisés",
+    "customThemesDesc": "Personnalisez votre portfolio avec des couleurs et des thèmes personnalisés qui correspondent à votre marque.",
+    "realtimeEditing": "Édition en Temps Réel",
+    "realtimeEditingDesc": "Voyez vos modifications instantanément avec notre éditeur de prévisualisation en direct. Aucun codage requis.",
+    "publishInstantly": "Publier Instantanément",
+    "publishInstantlyDesc": "Partagez votre portfolio avec une URL personnalisée. Mettez en ligne en quelques secondes, pas en heures.",
+    "gsapAnimations": "Animations GSAP",
+    "gsapAnimationsDesc": "Des animations époustouflantes alimentées par GSAP qui font ressortir votre portfolio.",
+    "professionalShowcase": "Présentation Professionnelle",
+    "professionalShowcaseDesc": "Présentez vos projets, compétences et expérience dans un format professionnel."
+  },
+  "common": {
+    "loading": "Chargement...",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "remove": "Retirer"
+  }
+}

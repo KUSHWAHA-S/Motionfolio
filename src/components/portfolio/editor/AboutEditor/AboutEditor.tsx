@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
 import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -8,6 +9,7 @@ import { User, Mail, MapPin, Link as LinkIcon } from "lucide-react";
 import { AboutSectionData } from "@/types/portfolio";
 
 export function AboutEditor() {
+  const { t } = useTranslation();
   const { sections, updateSection, addSection } = usePortfolioStore();
 
   const aboutSection = sections.find((s) => s.type === "about");
@@ -42,10 +44,10 @@ export function AboutEditor() {
         </div>
         <div>
           <h2 className="text-xl font-semibold" style={{ color: "#1A1A1A" }}>
-            About Section
+            {t("about.title")}
           </h2>
           <p className="text-sm" style={{ color: "#6B7280" }}>
-            Tell your story
+            {t("about.subtitle")}
           </p>
         </div>
       </div>
@@ -57,17 +59,17 @@ export function AboutEditor() {
       >
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Bio
+            {t("about.bio")}
           </label>
           <Textarea
             value={aboutData.bio || ""}
             onChange={(e) => updateAboutData({ bio: e.target.value })}
-            placeholder="Write a compelling bio about yourself, your background, and what you do..."
+            placeholder={t("about.bioPlaceholder")}
             rows={6}
             className="w-full"
           />
           <p className="text-xs text-gray-500 mt-1">
-            {(aboutData.bio || "").length} characters
+            {t("about.characters", { count: (aboutData.bio || "").length })}
           </p>
         </div>
 
@@ -75,13 +77,13 @@ export function AboutEditor() {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
               <Mail className="w-4 h-4" />
-              Email
+              {t("about.email")}
             </label>
             <Input
               type="email"
               value={aboutData.email || ""}
               onChange={(e) => updateAboutData({ email: e.target.value })}
-              placeholder="you@example.com"
+              placeholder={t("about.emailPlaceholder")}
               className="w-full"
             />
           </div>
@@ -89,12 +91,12 @@ export function AboutEditor() {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
               <MapPin className="w-4 h-4" />
-              Location
+              {t("about.location")}
             </label>
             <Input
               value={aboutData.location || ""}
               onChange={(e) => updateAboutData({ location: e.target.value })}
-              placeholder="e.g., San Francisco, CA"
+              placeholder={t("about.locationPlaceholder")}
               className="w-full"
             />
           </div>
@@ -103,13 +105,13 @@ export function AboutEditor() {
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
             <LinkIcon className="w-4 h-4" />
-            Website
+            {t("about.website")}
           </label>
           <Input
             type="url"
             value={aboutData.website || ""}
             onChange={(e) => updateAboutData({ website: e.target.value })}
-            placeholder="https://yourwebsite.com"
+            placeholder={t("about.websitePlaceholder")}
             className="w-full"
           />
         </div>

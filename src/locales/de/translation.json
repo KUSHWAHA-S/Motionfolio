@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "editPortfolio": "Portfolio bearbeiten",
+    "edit": "Bearbeiten",
+    "signOut": "Abmelden",
+    "logIn": "Anmelden"
+  },
+  "experience": {
+    "title": "Erfahrung",
+    "subtitle": "Ihr beruflicher Werdegang",
+    "addExperience": "Erfahrung hinzufügen",
+    "noExperience": "Noch keine Erfahrungseinträge",
+    "addFirstExperience": "Fügen Sie Ihre erste Erfahrung hinzu",
+    "experienceNumber": "Erfahrung {{number}}",
+    "jobTitle": "Stellenbezeichnung",
+    "jobTitlePlaceholder": "z.B., Senior Software Engineer",
+    "company": "Unternehmen",
+    "companyPlaceholder": "z.B., Google",
+    "period": "Zeitraum",
+    "periodPlaceholder": "z.B., Jan 2020 - Heute",
+    "location": "Standort",
+    "locationPlaceholder": "z.B., San Francisco, CA",
+    "description": "Beschreibung",
+    "descriptionPlaceholder": "Beschreiben Sie Ihre Verantwortlichkeiten und Erfolge..."
+  },
+  "about": {
+    "title": "Über-Abschnitt",
+    "subtitle": "Erzählen Sie Ihre Geschichte",
+    "bio": "Biografie",
+    "bioPlaceholder": "Schreiben Sie eine überzeugende Biografie über sich, Ihren Hintergrund und was Sie tun...",
+    "characters": "{{count}} Zeichen"
+  },
+  "hero": {
+    "title": "Hero-Abschnitt",
+    "subtitle": "Der erste Eindruck Ihres Portfolios",
+    "portfolioTitle": "Portfolio-Titel",
+    "portfolioTitlePlaceholder": "z.B., Max Mustermann - Full Stack Entwickler",
+    "subtitleLabel": "Untertitel",
+    "subtitlePlaceholder": "z.B., Erstaunliche digitale Erfahrungen schaffen",
+    "description": "Beschreibung",
+    "descriptionPlaceholder": "Eine kurze Einführung über Sie..."
+  },
+  "home": {
+    "createStunningPortfolios": "Erstellen Sie atemberaubende Portfolios",
+    "buildYourPortfolio": "Erstellen Sie Ihr Portfolio",
+    "inMinutesNotHours": "In Minuten, nicht Stunden",
+    "tagline": "Der moderne Portfolio-Builder für Designer, Entwickler und Kreative. Kein Coding erforderlich. Nur Kreativität.",
+    "getStarted": "Loslegen",
+    "viewDemo": "Demo ansehen",
+    "multipleTemplates": "Mehrere Vorlagen",
+    "multipleTemplatesDesc": "Wählen Sie aus wunderschönen, professionell gestalteten Vorlagen, die Ihre Arbeit perfekt präsentieren.",
+    "customThemes": "Benutzerdefinierte Themes",
+    "customThemesDesc": "Personalisieren Sie Ihr Portfolio mit benutzerdefinierten Farben und Themes, die zu Ihrer Marke passen.",
+    "realtimeEditing": "Echtzeit-Bearbeitung",
+    "realtimeEditingDesc": "Sehen Sie Ihre Änderungen sofort mit unserem Live-Vorschau-Editor. Kein Coding erforderlich.",
+    "publishInstantly": "Sofort veröffentlichen",
+    "publishInstantlyDesc": "Teilen Sie Ihr Portfolio mit einer benutzerdefinierten URL. Gehen Sie in Sekunden live, nicht in Stunden.",
+    "gsapAnimations": "GSAP-Animationen",
+    "gsapAnimationsDesc": "Atemberaubende Animationen, die von GSAP angetrieben werden und Ihr Portfolio hervorheben.",
+    "professionalShowcase": "Professionelle Präsentation",
+    "professionalShowcaseDesc": "Präsentieren Sie Ihre Projekte, Fähigkeiten und Erfahrungen in einem professionellen Format."
+  },
+  "common": {
+    "loading": "Laden...",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "add": "Hinzufügen",
+    "remove": "Entfernen"
+  }
+}

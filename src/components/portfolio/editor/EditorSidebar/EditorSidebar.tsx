@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import {
   Sparkles,
@@ -27,39 +28,41 @@ interface EditorSidebarProps {
   saveStatus: SaveStatus;
 }
 
-const sections: { id: SectionType; label: string; icon: React.ReactNode }[] = [
-  { id: "hero", label: "Hero", icon: <Sparkles className="w-4 h-4" /> },
-  { id: "about", label: "About", icon: <User className="w-4 h-4" /> },
-  { id: "projects", label: "Projects", icon: <Folder className="w-4 h-4" /> },
-  {
-    id: "experience",
-    label: "Experience",
-    icon: <Briefcase className="w-4 h-4" />,
-  },
-  { id: "skills", label: "Skills", icon: <Star className="w-4 h-4" /> },
-  { id: "theme", label: "Theme", icon: <Palette className="w-4 h-4" /> },
-  {
-    id: "template",
-    label: "Templates",
-    icon: <LayoutTemplate className="w-4 h-4" />,
-  },
-];
-
 export function EditorSidebar({
   activeSection,
   onSectionChange,
   saveStatus,
 }: EditorSidebarProps) {
+  const { t } = useTranslation();
+  
+  const sections: { id: SectionType; label: string; icon: React.ReactNode }[] = [
+    { id: "hero", label: t("editor.hero"), icon: <Sparkles className="w-4 h-4" /> },
+    { id: "about", label: t("editor.about"), icon: <User className="w-4 h-4" /> },
+    { id: "projects", label: t("editor.projects"), icon: <Folder className="w-4 h-4" /> },
+    {
+      id: "experience",
+      label: t("editor.experience"),
+      icon: <Briefcase className="w-4 h-4" />,
+    },
+    { id: "skills", label: t("editor.skills"), icon: <Star className="w-4 h-4" /> },
+    { id: "theme", label: t("editor.theme"), icon: <Palette className="w-4 h-4" /> },
+    {
+      id: "template",
+      label: t("editor.templates"),
+      icon: <LayoutTemplate className="w-4 h-4" />,
+    },
+  ];
+
   const getSaveStatusText = () => {
     switch (saveStatus) {
       case "saving":
-        return "Saving...";
+        return t("editor.saving");
       case "saved":
-        return "All saved";
+        return t("editor.saved");
       case "error":
-        return "Error saving";
+        return t("editor.error");
       default:
-        return "Ready";
+        return t("editor.ready");
     }
   };
 
@@ -84,7 +87,7 @@ export function EditorSidebar({
       {/* Header */}
       <div className="p-6" style={{ borderBottom: "1px solid #E5E7EB" }}>
         <h2 className="text-lg font-semibold mb-1" style={{ color: "#1A1A1A" }}>
-          Portfolio Editor
+          {t("editor.portfolioEditor")}
         </h2>
         <div
           className="text-xs font-medium"
@@ -141,7 +144,7 @@ export function EditorSidebar({
       {/* Footer */}
       <div className="p-4" style={{ borderTop: "1px solid #E5E7EB" }}>
         <p className="text-xs text-center" style={{ color: "#6B7280" }}>
-          Changes save automatically
+          {t("editor.changesSaveAutomatically")}
         </p>
       </div>
     </aside>

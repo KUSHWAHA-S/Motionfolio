@@ -2,12 +2,15 @@
 
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { useUserStore } from "@/store/useUserStore";
 import { Edit } from "lucide-react";
 import { colors } from "@/lib/colors";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function NavBar() {
+  const { t } = useTranslation();
   const { user, clearUser } = useUserStore();
   const router = useRouter();
   const pathname = usePathname();
@@ -99,7 +102,7 @@ export default function NavBar() {
                 e.currentTarget.style.backgroundColor = "transparent";
               }}
             >
-              Dashboard
+              {t("nav.dashboard")}
             </Link>
           </>
         )}
@@ -125,8 +128,8 @@ export default function NavBar() {
             }}
           >
             <Edit className="w-4 h-4" />
-            <span className="hidden sm:inline">Edit Portfolio</span>
-            <span className="sm:hidden">Edit</span>
+            <span className="hidden sm:inline">{t("nav.editPortfolio")}</span>
+            <span className="sm:hidden">{t("nav.edit")}</span>
           </Link>
         )}
       </div>
@@ -180,6 +183,7 @@ export default function NavBar() {
                   user.email?.split("@")[0]}
               </Link>
             </div>
+            <LanguageSwitcher />
             <button
               onClick={handleSignOut}
               className="text-sm font-semibold transition-all duration-200 px-4 py-2 rounded-lg"
@@ -198,10 +202,11 @@ export default function NavBar() {
                 e.currentTarget.style.color = "#64748B";
               }}
             >
-              Sign out
+              {t("nav.signOut")}
             </button>
           </>
         ) : (
+          <>
           <Link
             href="/auth/login"
             className="text-sm font-semibold transition-all duration-200 px-5 py-2.5 rounded-xl shadow-sm"
@@ -222,8 +227,9 @@ export default function NavBar() {
               e.currentTarget.style.boxShadow = "0 1px 3px rgba(0, 0, 0, 0.1)";
             }}
           >
-            Log in
-          </Link>
+            {t("nav.logIn")}
+            </Link>
+            <LanguageSwitcher /></>
         )}
       </div>
     </nav>

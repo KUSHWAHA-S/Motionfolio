@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,6 +9,7 @@ import { Star, Plus, X } from "lucide-react";
 import { SkillsSectionData } from "@/types/portfolio";
 
 export function SkillsEditor() {
+  const { t } = useTranslation();
   const { sections, updateSection, addSection } = usePortfolioStore();
   const [newSkill, setNewSkill] = useState("");
 
@@ -59,10 +61,10 @@ export function SkillsEditor() {
         </div>
         <div>
           <h2 className="text-xl font-semibold" style={{ color: "#1A1A1A" }}>
-            Skills
+            {t("skills.title")}
           </h2>
           <p className="text-sm" style={{ color: "#6B7280" }}>
-            Showcase your expertise
+            {t("skills.subtitle")}
           </p>
         </div>
       </div>
@@ -77,14 +79,14 @@ export function SkillsEditor() {
             className="block text-sm font-medium mb-2"
             style={{ color: "#1A1A1A" }}
           >
-            Add Skill
+            {t("skills.addSkill")}
           </label>
           <div className="flex gap-2">
             <Input
               value={newSkill}
               onChange={(e) => setNewSkill(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="e.g., React, TypeScript, Node.js"
+              placeholder={t("skills.addSkillPlaceholder")}
               className="flex-1"
             />
             <motion.button
@@ -101,7 +103,7 @@ export function SkillsEditor() {
               }}
             >
               <Plus className="w-4 h-4" />
-              Add
+              {t("skills.add")}
             </motion.button>
           </div>
         </div>
@@ -111,7 +113,7 @@ export function SkillsEditor() {
             className="block text-sm font-medium mb-2"
             style={{ color: "#1A1A1A" }}
           >
-            Your Skills ({skills.length})
+            {t("skills.yourSkills", { count: skills.length })}
           </label>
           {skills.length === 0 ? (
             <div
@@ -122,7 +124,7 @@ export function SkillsEditor() {
                 className="w-12 h-12 mx-auto mb-3"
                 style={{ color: "#9CA3AF" }}
               />
-              <p style={{ color: "#6B7280" }}>No skills added yet</p>
+              <p style={{ color: "#6B7280" }}>{t("skills.noSkills")}</p>
             </div>
           ) : (
             <div className="flex flex-wrap gap-2">

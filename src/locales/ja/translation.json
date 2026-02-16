@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "dashboard": "ダッシュボード",
+    "editPortfolio": "ポートフォリオを編集",
+    "edit": "編集",
+    "signOut": "サインアウト",
+    "logIn": "ログイン"
+  },
+  "experience": {
+    "title": "経験",
+    "subtitle": "あなたのキャリア",
+    "addExperience": "経験を追加",
+    "noExperience": "まだ経験のエントリがありません",
+    "addFirstExperience": "最初の経験を追加",
+    "experienceNumber": "経験 {{number}}",
+    "jobTitle": "職種",
+    "jobTitlePlaceholder": "例：シニアソフトウェアエンジニア",
+    "company": "会社",
+    "companyPlaceholder": "例：Google",
+    "period": "期間",
+    "periodPlaceholder": "例：2020年1月 - 現在",
+    "location": "場所",
+    "locationPlaceholder": "例：サンフランシスコ、CA",
+    "description": "説明",
+    "descriptionPlaceholder": "あなたの責任と成果を説明してください..."
+  },
+  "about": {
+    "title": "概要セクション",
+    "subtitle": "あなたのストーリーを語る",
+    "bio": "経歴",
+    "bioPlaceholder": "あなた自身、あなたの背景、そしてあなたが何をしているかについて説得力のある経歴を書いてください...",
+    "characters": "{{count}} 文字"
+  },
+  "hero": {
+    "title": "ヒーローセクション",
+    "subtitle": "あなたのポートフォリオの第一印象",
+    "portfolioTitle": "ポートフォリオタイトル",
+    "portfolioTitlePlaceholder": "例：山田太郎 - フルスタック開発者",
+    "subtitleLabel": "サブタイトル",
+    "subtitlePlaceholder": "例：素晴らしいデジタル体験を構築",
+    "description": "説明",
+    "descriptionPlaceholder": "あなた自身についての簡単な紹介..."
+  },
+  "home": {
+    "createStunningPortfolios": "素晴らしいポートフォリオを作成",
+    "buildYourPortfolio": "ポートフォリオを構築",
+    "inMinutesNotHours": "数時間ではなく、数分で",
+    "tagline": "デザイナー、開発者、クリエイター向けのモダンなポートフォリオビルダー。コーディング不要。創造性だけ。",
+    "getStarted": "始める",
+    "viewDemo": "デモを見る",
+    "multipleTemplates": "複数のテンプレート",
+    "multipleTemplatesDesc": "あなたの作品を完璧に紹介する、美しくプロフェッショナルにデザインされたテンプレートから選択できます。",
+    "customThemes": "カスタムテーマ",
+    "customThemesDesc": "あなたのブランドに合ったカスタムカラーとテーマでポートフォリオをパーソナライズできます。",
+    "realtimeEditing": "リアルタイム編集",
+    "realtimeEditingDesc": "ライブプレビューエディターで変更を即座に確認できます。コーディング不要。",
+    "publishInstantly": "即座に公開",
+    "publishInstantlyDesc": "カスタムURLでポートフォリオを共有できます。数時間ではなく、数秒で公開できます。",
+    "gsapAnimations": "GSAPアニメーション",
+    "gsapAnimationsDesc": "GSAPで動く素晴らしいアニメーションがあなたのポートフォリオを際立たせます。",
+    "professionalShowcase": "プロフェッショナルな展示",
+    "professionalShowcaseDesc": "プロフェッショナルな形式でプロジェクト、スキル、経験を紹介できます。"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "add": "追加",
+    "remove": "削除"
+  }
+}
