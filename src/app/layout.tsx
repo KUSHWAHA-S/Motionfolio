@@ -4,6 +4,7 @@ import ConditionalNavBar from "@/components/layout/ConditionalNavBar";
 import AuthProvider from "@/components/AuthProvider";
 import I18nProvider from "@/components/I18nProvider";
 import PageTransition from "@/components/layout/PageTransition";
+import Script from "next/script";
 
 export const metadata = { title: "Motionfolio" };
 
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           rel="stylesheet"
         />
       </head>
+      <Script src="http://localhost:4000/tracker.js" async />
       <body>
         <I18nProvider>
           <AuthProvider>
