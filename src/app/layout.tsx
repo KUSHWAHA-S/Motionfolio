@@ -23,7 +23,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           rel="stylesheet"
         />
       </head>
-      <Script src="http://localhost:4000/tracker.js" async />
+      <Script src="http://localhost:4000/tracker.js" data-site-id="e28f5c0d-7631-4241-973e-17430c132151"
+  defer async />
       <body>
         <I18nProvider>
           <AuthProvider>
